@@ -4,7 +4,7 @@
 ## 环境配置
 - 操作系统：支持Linux以及Mac OS
 - 开发语言：Python 3.x
-- 依赖包：pytest pyyaml numpy
+- 依赖包：pytest pyyaml numpy pytz
 - 版本控制工具：Git
 
 ## 部署网络，执行测试用例
