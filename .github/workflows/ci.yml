@@ -32,7 +32,7 @@ jobs:
       - name: Deploy xchainnet for test
         run: |
           git clone https://github.com/xuperchain/xuperchain.git
-          cd xuperchain && make && make testnet && cd testnet/ && sh control_all.sh
+          cd xuperchain && make && make testnet && cd testnet/ && sh control_all.sh start
       - name: Test with pytest
         run: |
           pytest cases/account/test_acc_0_normal.py
