@@ -1,0 +1,192 @@
+"""
+说明: 转账
+"""
+import json
+import time
+import pytest
+
+txid = None
+blockid = None
+
+class TestTransfer(object):
+    """申明类"""
+
+    @pytest.mark.p0 
+    def test_transferToAccount_1(self, input):  
+        """
+        转账给普通账户
+        """
+        print("\n转账给普通账户")
+        addr = "./output/data/alice/"
+        #查询账户余额
+        err, befor_balan = input.test.xlib.Balance(keys=addr)   
+        err, to = input.test.xlib.GetAddress(addr)     
+        # 转账
+        err, result = input.test.xlib.Transfer(to=to, amount="10000")
+        assert err == 0 and  result != "Select utxo error", "转账给合约账户 失败： " + result
+        time.sleep(4)
+        #对比余额
+        err, after_balan = input.test.xlib.Balance(keys=addr)
+        assert int(after_balan) == int(befor_balan) + int(10000)  
+    
+    @pytest.mark.p0 
+    def test_transferToAccount_2(self, input):           
+        """
+        指定被转账人,转账给账户
+        """
+        print("\n指定被转账人,转账给账户")       
+        addr = "./output/data/bob/"
+        # 查询账户余额
+        err, befor_balan = input.test.xlib.Balance(keys=addr)
+        err, to = input.test.xlib.GetAddress(addr) 
+        # 转账
+        err, result =input.test.xlib.Transfer(to=to, amount="1000", keys="./output/data/alice")
+        assert err == 0 and  result != "Select utxo error", "被转账人,转账给账户 失败： " + result
+        time.sleep(4)
+        # 对比余额
+        err, after_balan = input.test.xlib.Balance(keys=addr)
+        assert int(after_balan) == int(befor_balan) + int(1000)  
+    
+    @pytest.mark.p0 
+    def test_transferToAccount_3(self, input):
+        """
+        转账给合约账户
+        """           
+        print("\n转账给合约账户")   
+        account = "XC1111111111111111@" + input.conf.name
+        # 查询账户余额
+        err, befor_balan = input.test.xlib.Balance(account=account)
+        # 转账并获取 TX
+        err, txid = input.test.xlib.Transfer(to=account, amount= "100000000000")
+        assert err == 0 and  txid != "Select utxo error", "转账给合约账户 失败： " + txid
+        time.sleep(4)
+        # 对比余额
+        err, after_balan = input.test.xlib.Balance(account=account)
+        assert int(after_balan) == int(befor_balan) + int(100000000000)  
+
+    @pytest.mark.p0 
+    def test_transferToAccount_Frozen_1(self, input):      
+        """
+        带有冻结高度的转账给账户
+        """
+        print("\n带有冻结高度,转账给账户") 
+        # 查询账户余额
+        addr = "./output/data/alice2"
+        err, befor_balan = input.test.xlib.Balance(keys=addr, frozen=True)     
+        # 查询区块高度  
+        err, getheight = input.test.xlib.QueryBlockHeight()
+        assert err == 0, getheight
+        err, to = input.test.xlib.GetAddress(addr)
+        assert err == 0, to 
+        # 转账
+        err, result = input.test.xlib.Transfer(to=to, amount="100", frozen=(int(getheight) + 500))
+        assert err == 0 and  result != "Select utxo error", "冻结转账给账户 失败： " + result
+        time.sleep(4)
+        # 对比 高度和余额
+        err, after_balan = input.test.xlib.Balance(keys=addr, frozen=True)
+        assert err == 0, after_balan
+        err, after_height =input.test.xlib.QueryBlockHeight()
+        assert err == 0, after_height
+        if int(after_height) < (int(getheight) + int(500)):
+            assert int(after_balan) == int(befor_balan) + int(100)
+        else:
+            assert after_balan == befor_balan
+    
+    @pytest.mark.p0 
+    def test_transferToAccount_Frozen_2(self, input):    
+        """
+        带有冻结高度的转账给合约账户
+        """          
+        print("\n带有冻结高度的转账给合约账户") 
+        account = "XC1111111111111111@" + input.conf.name
+        # 查询账户余额
+        err, befor_balan = input.test.xlib.Balance(account=account, frozen=True)
+        # 查询区块高度  
+        err, getheight = input.test.xlib.QueryBlockHeight()
+        assert err == 0, getheight
+        # 转账
+        err, result = input.test.xlib.Transfer(to=account, 
+                                             amount= "100", frozen= (int(getheight) + 500))
+        assert err == 0 and result != "Select utxo error", "冻结转账给 合约账户 失败：" + result
+        time.sleep(4)
+        # 对比 高度和余额
+        err, after_balan = input.test.xlib.Balance(account=account, frozen=True)
+        assert err == 0, after_balan
+        err, after_height =input.test.xlib.QueryBlockHeight()
+        assert err == 0, after_height
+        if int(after_height) < (int(getheight) + int(500)):
+            assert int(after_balan) == int(befor_balan) + int(100)
+        else:
+            assert after_balan == befor_balan
+   
+    @pytest.mark.p0 
+    def test_queryBalance_1(self, input):    
+        """
+        查询账户余额,余额
+        """ 
+        print("\n查询账户余额") 
+        err, result = input.test.xlib.Balance(keys="./output/data/alice")   
+        assert err == 0, "查询账户余额 失败" + result
+
+    @pytest.mark.p0 
+    def test_queryFeeZeBalance_1(self, input): 
+        """
+        查询账户余额,冻结余额
+        """           
+        print("\n查询账户冻结余额")          
+        err, result = input.test.xlib.Balance(keys="./output/data/alice", frozen=True)     
+        assert err == 0, "查询账户冻结余额 失败" + result
+     
+    @pytest.mark.p0 
+    def test_queryBalance_3(self, input): 
+        """
+        查询合约账户余额
+        """         
+        print("\n查询合约账户余额")  
+        account = "XC1111111111111111@" + input.conf.name        
+        err, result = input.test.xlib.Balance(account=account) 
+        assert err == 0, "查询合约账户余额 失败" + result  
+
+    @pytest.mark.p0 
+    def test_queryFeeZeBalance_2(self, input):           
+        """
+        查询合约账户余额,冻结余额
+        """                   
+        print("\n查询合约账户冻结余额")  
+        account = "XC1111111111111111@" + input.conf.name    
+        err, result = input.test.xlib.Balance(account=account, frozen=True)        
+        assert err == 0, "查询合约账户冻结余额 失败" + result      
+
+    @pytest.mark.p0 
+    def test_queryTxBlock(self, input):  
+        """
+        根据txid 查询交易信息          
+        """ 
+        # 获取转账的txid
+        account = "XC1111111111111111@" + input.conf.name  
+        err, result  = input.test.xlib.Transfer(to=account, amount= "1")
+        assert err == 0, "转账失败：" + result
+        
+        txid = input.test.xlib.GetTxidFromRes(result)
+
+        print("\n根据txid 查询交易信息")
+        # 等待tx上链
+        err, result = input.test.xlib.WaitTxOnChain(txid)
+        assert err == 0, result
+
+        err, blockid = input.test.xlib.QueryTx(txid) 
+        assert err == 0, "查询tx失败：" + blockid
+        assert blockid != " "   
+       
+        print("根据blockid，查询区块信息")
+        err, result = input.test.xlib.QueryBlock(blockid)  
+        assert err == 0 and result == "true", "查询block失败：" + blockid
+       
+    @pytest.mark.p0 
+    def test_queryBlockByH(self, input):  
+        """
+        根据高度查询区块          
+        """ 
+        print("\n根据高度查询区块")
+        err, result = input.test.xlib.QueryBlockByH("5")  
+        assert err == 0, "查询block失败：" + result

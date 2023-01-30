@@ -1,0 +1,26 @@
+hosts:
+  node1: 127.0.0.1:25111
+  node2: 127.0.0.1:25112
+  node3: 127.0.0.1:25113
+
+# 请求默认发送到节点node1
+default_host: 127.0.0.1:25111
+
+# 指定bin/xchain-cli所在目录
+client_path: ./client
+
+#准备如下结构的account文件夹，里面放置node1～3的key(包含address和公私钥)，放置client下的account文件夹
+accounts:
+  node1: account/node1
+  node2: account/node2
+  node3: account/node3
+
+nofee: False
+
+# 交易加密算法，gm或者默认方式，不填写按默认方式
+crypto:
+
+all_log: True
+
+# 链名称
+name: xuper
