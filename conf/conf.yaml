@@ -1,10 +1,10 @@
 hosts:
-  node1: 127.0.0.1:25111
-  node2: 127.0.0.1:25112
-  node3: 127.0.0.1:25113
+  node1: 127.0.0.1:37101
+  node2: 127.0.0.1:37102
+  node3: 127.0.0.1:37103
 
 # 请求默认发送到节点node1
-default_host: 127.0.0.1:25111
+default_host: 127.0.0.1:37101
 
 # 指定bin/xchain-cli所在目录
 client_path: ./client

@@ -37,4 +37,4 @@ jobs:
           cd ../.. && cp xuperchain/output/bin/xchain-cli client/bin/
       - name: Test with pytest
         run: |
-          pytest cases/account/test_acc_0_normal.py
+          sh run_case.sh basic
