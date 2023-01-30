@@ -2,14 +2,12 @@
 使用pytest框架，搭建xchain的自动化测试用例，覆盖账户、转账、权限、合约、平行链、共识、共识升级、事件订阅等功能点。
 
 ## 环境配置
----
 - 操作系统：支持Linux以及Mac OS
 - 开发语言：Python 3.x
 - 测试框架：pytest
 - 版本控制工具：Git
 
 ## 部署网络，执行测试用例
----
 ### 1.部署3节点xchain网络
 参考文档https://github.com/xuperchain/xuperchain#run-multi-nodes-blockchain
 
