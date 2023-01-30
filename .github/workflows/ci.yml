@@ -33,7 +33,7 @@ jobs:
         run: |
           git clone https://github.com/xuperchain/xuperchain.git
           cd xuperchain && make && make testnet && cd testnet/ && sh control_all.sh start 
-          cp output/bin/xchain-cli ../client/bin/
+          cd ../../../ && cp xuperchain/output/bin/xchain-cli client/bin/
       - name: Test with pytest
         run: |
           pytest cases/account/test_acc_0_normal.py
