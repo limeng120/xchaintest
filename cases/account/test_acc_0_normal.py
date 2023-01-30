@@ -104,7 +104,7 @@ class TestAccount(object):
         英文助记词
         """
         print("\n通过助记词生成私钥,英文助记词") 
-        if input.conf.crypto is "":
+        if input.conf.crypto == "":
             # 非国密
             mnemonic = "\"course chef year noodle dumb safe curve gap huge van equal camera\""
             address = "kxngcZC9vUgiM4bEHZh4pWDqFpSDWvw7L"
@@ -125,7 +125,7 @@ class TestAccount(object):
         """         
         print("\n通过助记词生成私钥,英文助记词,指定输出目录") 
         output="./output/data/lucy9"
-        if input.conf.crypto is "":
+        if input.conf.crypto == "":
             # 非国密
             mnemonic = "\"course chef year noodle dumb safe curve gap huge van equal camera\""
             address = "kxngcZC9vUgiM4bEHZh4pWDqFpSDWvw7L"
