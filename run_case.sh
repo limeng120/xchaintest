@@ -72,7 +72,7 @@ function update_test()
 function tdpos_test()
 {
     echo "=======升级共识：tdpos 2矿工 ======="
-    pytest cases/update/test_updateCons.py::TestUpdateCons::test_case01
+    pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case01
 
     echo "=======测试环境：tdpos 2矿工 ======="
     echo "=======环境检测 ======="
@@ -84,7 +84,7 @@ function tdpos_test()
 function xpos_test()
 {
     echo "=======升级共识：xpos 2矿工 ======="
-    pytest cases/update/test_updateCons.py::TestUpdateCons::test_case06
+    pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case06
 
     echo "=======测试环境：xpos 2矿工 ======="
     echo "=======环境检测 ======="
@@ -96,7 +96,7 @@ function xpos_test()
 function poa_test()
 {
     echo "=======升级共识：poa 2矿工 ======="
-    pytest cases/update/test_updateCons.py::TestUpdateCons::test_case02
+    pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case02
 
     echo "=======测试环境：poa 2矿工 ======="
     echo "=======环境检测 ======="
@@ -108,7 +108,7 @@ function poa_test()
 function xpoa_test()
 {
     echo "=======升级共识：xpoa 2矿工 ======="
-    pytest cases/update/test_updateCons.py::TestUpdateCons::test_case04
+    pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case04
 
     echo "=======测试环境：xpoa 2矿工 ======="
     echo "=======环境检测 ======="
@@ -120,7 +120,7 @@ function xpoa_test()
 function single_test()
 {
     echo "=======升级共识：single ======="
-    pytest cases/update/test_updateCons.py::TestUpdateCons::test_case08
+    pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case08
 
     echo "=======测试环境：single ======="
     echo "=======环境检测 ======="

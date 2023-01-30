@@ -39,3 +39,7 @@ pytest -s case/test_env.py
 4. logs里记录了命令的执行与结果，如果只看异常情况，可以在`conf.yaml`里将`all_log`设置为False. 多次执行时，默认不清理log
 5. 配置文件中的nofee字段默认为`False`，如果设置为`True`，不会给任何命令添加`--fee`字段
 6. 测试gm网络，需修改配置文件中crypto: gm，并更新client/account下的node1~node3的公私玥
+
+### 6.新增用例
+文件命名规范 test_[module]\_[id]\_[用例类别].py，例如test_acc_0_normal.py
+
