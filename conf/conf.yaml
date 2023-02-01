@@ -9,7 +9,7 @@ default_host: 127.0.0.1:37101
 # 指定bin/xchain-cli所在目录
 client_path: ./client
 
-#准备如下结构的account文件夹，里面放置node1～3的key(包含address和公私钥)，放置client下的account文件夹
+# 准备如下结构的account文件夹，里面放置node1～3的key(包含address和公私钥)，放置client下的account文件夹
 accounts:
   node1: account/node1
   node2: account/node2
