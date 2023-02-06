@@ -209,9 +209,7 @@ class TestNVRRErr:
             input_args.node2, input_args.node1, input_args.key1
         )
         assert err != 0, "【异常】不使用提名的合约账户撤销：" + result
-        assert (
-            "value not found, please check your input_args parameters" in result
-        ), "报错信息错误"
+        assert "value not found, please check your input parameters" in result, "报错信息错误"
 
     @pytest.mark.abnormal
     def test_case15(self, input_args):

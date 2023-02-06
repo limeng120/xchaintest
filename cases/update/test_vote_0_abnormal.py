@@ -1,15 +1,16 @@
+# pylint: disable=W0603
 """
 说明：测试提案后，异常的投票、异常的撤销提案
 """
 import pytest
+
+PROPOSE_ID = ""
 
 
 class TestVoteErr:
     """
     测试提案后，异常的投票、异常的撤销提案
     """
-
-    propose_id = ""
 
     @pytest.mark.abnormal
     def test_case01(self, input_args):
@@ -26,17 +27,17 @@ class TestVoteErr:
         validator = input_args.addrs
         err, version = input_args.test.update.gen_cons_json("tdpos", validator)
         assert err == 0, version
-
-        err, self.propose_id = input_args.test.update.propose_update()
-        assert err == 0, self.propose_id
-        err, result = input_args.test.update.vote_update(self.propose_id, amount=10)
+        global PROPOSE_ID
+        err, PROPOSE_ID = input_args.test.update.propose_update()
+        assert err == 0, PROPOSE_ID
+        err, result = input_args.test.update.vote_update(PROPOSE_ID, amount=10)
         assert err == 0, result
 
         # 15个区块后触发升级，等20个区块
         input_args.test.xlib.wait_num_height(20)
 
         # 预期提案状态为rejected
-        err, result = input_args.test.update.query_propose(self.propose_id)
+        err, result = input_args.test.update.query_propose(PROPOSE_ID)
         assert err == 0, "查询提案失败：" + result
         assert "rejected" in result
 
@@ -53,7 +54,7 @@ class TestVoteErr:
         """
         print("\n【异常】有投票记录，提案状态是reject时，发起投票")
         # 注意 id是上个case的
-        err, result = input_args.test.update.vote_update(self.propose_id, amount=10)
+        err, result = input_args.test.update.vote_update(PROPOSE_ID, amount=10)
         assert err != 0, result
         assert "proposal status is rejected,can not vote now" in result
 
@@ -64,7 +65,7 @@ class TestVoteErr:
         """
         print("\n【异常】有投票记录，提案状态是reject时，撤销提案")
         # 注意 id是上个case的
-        err, result = input_args.test.update.thaw_propose(self.propose_id)
+        err, result = input_args.test.update.thaw_propose(PROPOSE_ID)
         assert err != 0, result
         assert "some one has voted 10 tickets, can not thaw now" in result
 
@@ -77,15 +78,15 @@ class TestVoteErr:
         validator = input_args.addrs
         err, version = input_args.test.update.gen_cons_json("tdpos", validator)
         assert err == 0, version
-
-        err, self.propose_id = input_args.test.update.propose_update()
-        assert err == 0, self.propose_id
+        global PROPOSE_ID
+        err, PROPOSE_ID = input_args.test.update.propose_update()
+        assert err == 0, PROPOSE_ID
 
         # 15个区块后触发升级，等20个区块
         input_args.test.xlib.wait_num_height(20)
 
         # 预期提案状态为rejected
-        err, result = input_args.test.update.query_propose(self.propose_id)
+        err, result = input_args.test.update.query_propose(PROPOSE_ID)
         assert err == 0, "查询提案失败：" + result
         assert "rejected" in result
 
@@ -96,7 +97,7 @@ class TestVoteErr:
         """
         print("\n【异常】提案状态是rejected，发起投票")
         # 注意 id是上个case的
-        err, result = input_args.test.update.vote_update(self.propose_id, amount=10)
+        err, result = input_args.test.update.vote_update(PROPOSE_ID, amount=10)
         assert err != 0, result
         assert "proposal status is rejected,can not vote now" in result
 
@@ -107,7 +108,7 @@ class TestVoteErr:
         """
         print("\n【异常】提案状态是rejected，发起投票")
         # 注意 id是上个case的
-        err, result = input_args.test.update.thaw_propose(self.propose_id)
+        err, result = input_args.test.update.thaw_propose(PROPOSE_ID)
         assert err != 0, result
         assert (
             "proposal status is rejected, only a voting proposal could be thawed"
@@ -131,22 +132,22 @@ class TestVoteErr:
             "tdpos", validator, stop_vote_height=stop, trigger_height=trigger
         )
         assert err == 0, version
+        global PROPOSE_ID
+        err, PROPOSE_ID = input_args.test.update.propose_update()
+        assert err == 0, PROPOSE_ID
 
-        err, self.propose_id = input_args.test.update.propose_update()
-        assert err == 0, self.propose_id
-
-        err, result = input_args.test.update.vote_update(self.propose_id)
+        err, result = input_args.test.update.vote_update(PROPOSE_ID)
         assert err == 0, result
 
         input_args.test.xlib.wait_num_height(12)
 
         # 等到stop高度之后，查询提案状态
-        err, result = input_args.test.update.query_propose(self.propose_id)
+        err, result = input_args.test.update.query_propose(PROPOSE_ID)
         assert err == 0, "查询提案失败：" + result
         assert "passed" in result
 
         # 再次投票
-        err, result = input_args.test.update.vote_update(self.propose_id, amount=1)
+        err, result = input_args.test.update.vote_update(PROPOSE_ID, amount=1)
         assert err != 0, result
         assert "proposal status is passed,can not vote now" in result
 
@@ -157,7 +158,7 @@ class TestVoteErr:
         """
         print("\n【异常】提案状态是passed，撤销提案，预期失败")
         # 撤销提案，id来自上个case
-        err, result = input_args.test.update.thaw_propose(self.propose_id)
+        err, result = input_args.test.update.thaw_propose(PROPOSE_ID)
         assert err != 0, result
         assert (
             "some one has voted 60000000000000000000 tickets, can not thaw now"
@@ -173,12 +174,12 @@ class TestVoteErr:
         """
         print("\n【异常】提案状态是completed_success，发起投票，预期失败")
         # trigger高度之后，查询提案状态
-        err, result = input_args.test.update.query_propose(self.propose_id)
+        err, result = input_args.test.update.query_propose(PROPOSE_ID)
         assert err == 0, "查询提案失败：" + result
         assert "completed_success" in result
 
         # 再次投票
-        err, result = input_args.test.update.vote_update(self.propose_id, amount=1)
+        err, result = input_args.test.update.vote_update(PROPOSE_ID, amount=1)
         assert err != 0, result
         assert "proposal status is completed_success,can not vote now" in result
 
@@ -189,7 +190,7 @@ class TestVoteErr:
         """
         print("\n【异常】提案状态是completed_success，撤销提案，预期失败")
         # 撤销提案
-        err, result = input_args.test.update.thaw_propose(self.propose_id)
+        err, result = input_args.test.update.thaw_propose(PROPOSE_ID)
         assert err != 0, result
         assert (
             "some one has voted 60000000000000000000 tickets, can not thaw now"
@@ -234,7 +235,7 @@ class TestVoteErr:
         err, version = input_args.test.update.gen_cons_json("tdpos", validator)
         assert err == 0, version
         err, propose_id = input_args.test.update.propose_update()
-        assert err == 0, propose_id
+        assert err == 0, PROPOSE_ID
 
         # 预期提案状态为voting
         err, result = input_args.test.update.query_propose(propose_id)
@@ -265,8 +266,8 @@ class TestVoteErr:
         """
         print("\n【异常】json缺少必填参数, trigger高度之后提案状态是completed_failure")
         validator = input_args.addrs
-
-        err, version, self.propose_id = input_args.test.update.update_consensus(
+        global PROPOSE_ID
+        err, version, PROPOSE_ID = input_args.test.update.update_consensus(
             "aaa", validator
         )
         assert err == 0, "提案和投票失败：" + version
@@ -275,7 +276,7 @@ class TestVoteErr:
         input_args.test.xlib.wait_num_height(20)
 
         # 预期提案状态为completed_failure
-        err, result = input_args.test.update.query_propose(self.propose_id)
+        err, result = input_args.test.update.query_propose(PROPOSE_ID)
         assert err == 0, "查询提案失败：" + result
         assert "completed_failure" in result
 
@@ -286,7 +287,7 @@ class TestVoteErr:
         """
         print("\n【异常】提案状态是completed_failure，发起投票，预期失败")
         # 再次投票
-        err, result = input_args.test.update.vote_update(self.propose_id, amount=1)
+        err, result = input_args.test.update.vote_update(PROPOSE_ID, amount=1)
         assert err != 0, result
         assert "proposal status is completed_failure,can not vote now" in result
 
@@ -297,7 +298,7 @@ class TestVoteErr:
         """
         print("\n【异常】提案状态是completed_failure，撤销提案，预期失败")
         # 撤销提案
-        err, result = input_args.test.update.thaw_propose(self.propose_id)
+        err, result = input_args.test.update.thaw_propose(PROPOSE_ID)
         assert err != 0, result
         assert (
             "some one has voted 60000000000000000000 tickets, can not thaw now"

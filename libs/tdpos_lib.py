@@ -32,7 +32,7 @@ class Tdpos(Common):
         """
         # 获取当前的共识状态
         err, result = self.xlib.consensus_invoke(
-            consensus_type="tdpos", method="getTdposInfos", **kwargs
+            type="tdpos", method="getTdposInfos", **kwargs
         )
         if err != 0:
             return err, result
