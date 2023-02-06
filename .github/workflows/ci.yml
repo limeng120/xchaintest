@@ -35,6 +35,7 @@ jobs:
           cd xuperchain && make && make testnet && cd testnet/ && sh control_all.sh start
           pwd
           cd ../.. && cp xuperchain/output/bin/xchain-cli client/bin/
+          sleep 15
       - name: Test with pytest
         run: |
           bash run_case.sh basic
