@@ -37,7 +37,9 @@ jobs:
       - name: Deploy xchainnet for test
         run: |
           git clone https://github.com/xuperchain/xuperchain.git
-          cd xuperchain && make && make testnet && cd testnet/ && sh control_all.sh start
+          git clone https://github.com/OpenAtomFoundation/xupercore.git
+          cd xuperchain && echo "replace github.com/xuperchain/xupercore => ../xupercore" >> go.mod
+          make && make testnet && cd testnet/ && sh control_all.sh start
           pwd
           cd ../.. && cp xuperchain/output/bin/xchain-cli client/bin/
           sleep 15

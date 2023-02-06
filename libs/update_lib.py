@@ -69,7 +69,7 @@ class Update:
                 "height": int(trigger_height),
                 "module": "xkernel",
                 "contract": "$consensus",
-                "method": "update_consensus",
+                "method": "updateConsensus",
                 "args": {},
             },
         }

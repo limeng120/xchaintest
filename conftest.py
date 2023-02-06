@@ -1,6 +1,4 @@
 """
-Auther：Ethan
-
 pytest的测试配置文件（本文件不可以重命名）
 """
 import pytest
