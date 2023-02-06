@@ -1,25 +1,27 @@
 hosts:
-  node1: 127.0.0.1:25111
-  node2: 127.0.0.1:25112
-  node3: 127.0.0.1:25113
+  node1: 127.0.0.1:37101
+  node2: 127.0.0.1:37102
+  node3: 127.0.0.1:37103
 
 # 请求默认发送到节点node1
-default_host: 127.0.0.1:25111
+default_host: 127.0.0.1:37101
 
 # 指定bin/xchain-cli所在目录
 client_path: ./client
 
-#准备如下结构的account文件夹，里面放置node1～3的key(包含address和公私钥)，放置client下的account文件夹
+# 准备如下结构的account文件夹，里面放置node1～3的key(包含address和公私钥)，放置client下的account文件夹
 accounts:
   node1: account/node1
   node2: account/node2
   node3: account/node3
 
+# 测试无币化时，设置为`True`
 nofee: False
 
 # 交易加密算法，gm或者默认方式，不填写按默认方式
 crypto:
 
+# 如果只看异常情况，设置为False
 all_log: True
 
 # 链名称
