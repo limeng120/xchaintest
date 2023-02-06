@@ -6,7 +6,7 @@ jobs:
       matrix:
         python-version: ["3.7"]
         go-version: [1.13.x]
-        platform: [ubuntu-latest]
+        platform: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v3
@@ -36,6 +36,12 @@ jobs:
           pwd
           cd ../.. && cp xuperchain/output/bin/xchain-cli client/bin/
           sleep 15
+      - name: Complie Go contract
+        run: |
+          git clone https://github.com/xuperchain/contract-sdk-go.git
+          cd contract-sdk-go/example
+          go build -o ../../client/goTemplate/counter counter/main.go
+          go build -o ../../client/goTemplate/features features/main.go
       - name: Test with pytest
         run: |
           bash run_case.sh basic

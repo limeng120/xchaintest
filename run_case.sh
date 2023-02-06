@@ -17,7 +17,7 @@ mkdir -p $result_dir
 
 function checkhealth()
 {
-    pytest $args cases/test_env.py::TestEnv::test_trunkHeight
+    pytest $args cases/test_env.py::TestEnv::test_trunk_height
     if [ $? -ne 0 ];then
         exit 1
     fi
@@ -65,7 +65,7 @@ function pchain_test()
 function update_test()
 {
     echo "=======共识升级测试======="
-    pytest $args cases/update --junit-xml=$result_dir/test_update.xml 
+    pytest $args cases/update --junit-xml=$result_dir/test_update.xml
     checkhealth
 }
 
@@ -132,7 +132,7 @@ function single_test()
 function contractsdk_test()
 {
     echo "=======环境检测 ======="
-    pytest $args cases/test_env.py --junit-xml=$result_dir/test_env.xml 
+    pytest $args cases/test_env.py --junit-xml=$result_dir/test_env.xml
     echo "=======合约sdk测试 ======="
     pytest $args cases/contractsdk --junit-xml=$result_dir/test_contractsdk.xml
 }
@@ -149,4 +149,6 @@ elif [ "$type" == "highlevel" ];then
     xpoa_test
     tdpos_test
     xpos_test
+else
+    echo "please input args: basic or highlevel"
 fi

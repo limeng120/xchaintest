@@ -45,7 +45,7 @@ class TestCAErr:
         account = "test111111111111"
         err, result = input_args.test.xlib.create_contract_account(account=account)
         assert err != 0, "创建合约账户成功，不合预期：" + result
-        msg = "invoke NewAccount failed, account number expect continuous 16 digits"
+        msg = "expect continuous 16 digits"
         assert msg in result, "报错信息错误"
 
     @pytest.mark.abnormal

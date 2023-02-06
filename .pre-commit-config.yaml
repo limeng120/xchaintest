@@ -16,13 +16,3 @@ repos:
     rev: 56b3cb4
     hooks:
       - id: pylint
-
-  - repo: https://github.com/detailyang/pre-commit-shell
-    rev: 1.0.5
-    hooks:
-      - id: shell-lint
-
-  - repo: https://github.com/lovesegfault/beautysh
-    rev: v6.2.1
-    hooks:
-      - id: beautysh

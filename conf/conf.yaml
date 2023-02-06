@@ -15,11 +15,13 @@ accounts:
   node2: account/node2
   node3: account/node3
 
+# 测试无币化时，设置为`True`
 nofee: False
 
 # 交易加密算法，gm或者默认方式，不填写按默认方式
 crypto:
 
+# 如果只看异常情况，设置为False
 all_log: True
 
 # 链名称
