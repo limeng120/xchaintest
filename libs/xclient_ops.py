@@ -26,7 +26,7 @@ def record(cmd, result):
         int(time.time()), pytz.timezone("Asia/Shanghai")
     ).strftime("%Y-%m-%d %H:%M:%S")
 
-    desc_file = open(log_file, "a", encoding="utf-8")
+    log_file = open(log_file, "a", encoding="utf-8")
     msg = (
         "\n"
         + current_time
@@ -38,8 +38,8 @@ def record(cmd, result):
         + result
         + "\n"
     )
-    desc_file.write(msg)
-    desc_file.close()
+    log_file.write(msg)
+    log_file.close()
     print(msg)
 
 
@@ -174,7 +174,7 @@ class Xclient:
             "cd",
             self.conf.client_path,
             "&&",
-            "rm -desc_file",
+            "rm -f",
             logfile,
             "&&",
             "./bin/xchain-cli",
@@ -211,11 +211,11 @@ class Xclient:
             file = open(addrs_file, "w")
             file.close()
 
-        with open(addrs_file, "w") as desc_file:
+        with open(addrs_file, "w") as addr_file:
             for addr in addrs:
                 addr = acl_account + "/" + addr
-                desc_file.write(addr + "\n")
-            desc_file.close()
+                addr_file.write(addr + "\n")
+            addr_file.close()
 
 
 class Shell:

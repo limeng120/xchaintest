@@ -10,13 +10,11 @@ class TestFeatures2:
     测试cpp合约sdk
     """
 
-    file = "cppTemplate/features.wasm"
     cname = "features"
     # 合约余额
     amount = "70"
     befor_account = ""
     befor_cname = ""
-    txid = ""
 
     def trans_use(self, account, input_args):
         """
@@ -279,7 +277,6 @@ class TestFeatures2:
         assert json.loads(result.split("response:")[-1].split("\n")[0]) == json.loads(
             invoke_args
         ), ("object类型结果值不匹配" + result)
-        self.txid = result.split(":")[-1].strip()
 
     @pytest.mark.p2
     def test_case16(self, input_args):
@@ -287,18 +284,20 @@ class TestFeatures2:
         getTx，查询交易
         """
         print("\nquery_tx,查询交易")
+        err, txid = input_args.test.xlib.transfer(to=self.cname, amount="1")
+        assert err == 0, txid
 
         # 等tx上链
-        err, result = input_args.test.xlib.wait_tx_on_chain(self.txid)
+        err, result = input_args.test.xlib.wait_tx_on_chain(txid)
         assert err == 0, result
 
-        invoke_args = {"tx_id": self.txid}
+        invoke_args = {"tx_id": txid}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
             "native", self.cname, "query_tx", args
         )
         assert err == 0, "查询query_tx交易失败： " + result
-        err, blockid = input_args.test.xlib.query_tx(self.txid)
+        err, blockid = input_args.test.xlib.query_tx(txid)
         assert blockid in result, "查询结果错误"
 
     @pytest.mark.p2
@@ -307,7 +306,11 @@ class TestFeatures2:
         getBlock，查询区块
         """
         print("\nquery_block,查询区块")
-        err, blockid = input_args.test.xlib.query_tx(self.txid)
+        err, txid = input_args.test.xlib.transfer(to=self.cname, amount="1")
+        assert err == 0, txid
+        err, result = input_args.test.xlib.wait_tx_on_chain(txid)
+        assert err == 0, result
+        err, blockid = input_args.test.xlib.query_tx(txid)
         assert err == 0, "查询block失败：" + blockid
         assert blockid != " "
         invoke_args = {"blockid": blockid}

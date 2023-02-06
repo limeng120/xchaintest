@@ -32,7 +32,7 @@ class Event:
         for x in args:
             res.append("--" + x)
         if event_filter != "''":
-            res.append("--event_filter")
+            res.append("--filter")
             res.append(event_filter)
         cmd = " ".join(str(x) for x in res)
         self.xclient.exec_host_backend(cmd, logfile, **kwargs)

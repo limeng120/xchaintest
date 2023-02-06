@@ -212,7 +212,7 @@ class TestFeatursErr:
             "native", self.cname, "get", args, amount=-10
         )
         assert err != 0, "get方法，写入kv,并给合约转账,amount设为负数成功,不符合预期：" + result
-        msg = "contract error status:500 message:failed"
+        msg = "Amount in transaction can not be negative number"
         assert msg in result, "报错信息错误"
 
     @pytest.mark.abnormal

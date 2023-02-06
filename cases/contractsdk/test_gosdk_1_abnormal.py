@@ -10,7 +10,6 @@ class TestGOFeatursErr:
     测试go合约sdk的异常场景
     """
 
-    file = "goTemplate/features"
     cname = "features_go"
 
     @pytest.mark.abnormal
@@ -25,7 +24,7 @@ class TestGOFeatursErr:
         }
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "query_tx", args
+            "native", self.cname, "QueryTx", args
         )
         assert err != 0 and "transaction not found" in result, "查询不存在的tx成功： " + result
 
@@ -41,7 +40,7 @@ class TestGOFeatursErr:
         }
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "query_block", args
+            "native", self.cname, "QueryBlock", args
         )
         assert err != 0 and "block not exist in this chain" in result, (
             "查询getBlock区块失败： " + result

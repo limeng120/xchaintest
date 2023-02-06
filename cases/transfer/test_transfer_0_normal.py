@@ -177,7 +177,7 @@ class TestTransfer:
         err, result = input_args.test.xlib.transfer(to=account, amount="1")
         assert err == 0, "转账失败：" + result
 
-        txid = input_args.test.xlib.GettxidFromRes(result)
+        txid = input_args.test.xlib.get_txid_from_res(result)
 
         print("\n根据txid 查询交易信息")
         # 等待tx上链

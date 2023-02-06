@@ -10,7 +10,6 @@ class TestBuiltinErr:
     测试java合约sdk的异常
     """
 
-    file = "javaTemplate/builtin-types-0.1.0-jar-with-dependencies.jar"
     cname = "builtin_types_j"
 
     def transfer_use(self, invoke_args, input_args):

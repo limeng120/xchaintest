@@ -17,7 +17,6 @@ class TestBuiltin:
     befor_account = ""
     befor_cname = ""
     widthCount = "".zfill(1024)
-    txid = ""
 
     def get_list(self, invoke_args, input_args):
         """
@@ -66,13 +65,13 @@ class TestBuiltin:
         """
         print("\ngetTx,查询交易")
         err, result = input_args.test.xlib.transfer(to="abc", amount="1")
-        assert err == 0
-
-        self.txid = input_args.test.xlib.get_txid_from_res(result)
-        err, result = input_args.test.xlib.wait_tx_on_chain(self.txid)
         assert err == 0, result
 
-        invoke_args = {"txid": self.txid}
+        txid = input_args.test.xlib.get_txid_from_res(result)
+        err, result = input_args.test.xlib.wait_tx_on_chain(txid)
+        assert err == 0, result
+
+        invoke_args = {"txid": txid}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
             "native", self.cname, "getTx", args
@@ -85,7 +84,12 @@ class TestBuiltin:
         getBlock，查询区块
         """
         print("\ngetBlock，查询区块")
-        err, blockid = input_args.test.xlib.query_tx(self.txid)
+        err, result = input_args.test.xlib.transfer(to="abc", amount="1")
+        assert err == 0, result
+        txid = input_args.test.xlib.get_txid_from_res(result)
+        err, result = input_args.test.xlib.wait_tx_on_chain(txid)
+        assert err == 0, result
+        err, blockid = input_args.test.xlib.query_tx(txid)
         assert err == 0, "查询block失败：" + blockid
         assert blockid != " "
         invoke_args = {"blockid": blockid}

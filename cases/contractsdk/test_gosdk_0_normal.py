@@ -42,7 +42,7 @@ class TestGoFeatures:
         print("\n根据txid 查询交易信息")
         args = json.dumps({"txid": txid})
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "query_tx", args
+            "native", self.cname, "QueryTx", args
         )
         assert err == 0, result
         result = input_args.test.xlib.get_value_from_res(result)
@@ -53,7 +53,7 @@ class TestGoFeatures:
         print("\n根据block 查询区块信息")
         args = json.dumps({"block_id": blockid})
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "query_block", args
+            "native", self.cname, "QueryBlock", args
         )
         assert err == 0, result
         result = input_args.test.xlib.get_value_from_res(result)

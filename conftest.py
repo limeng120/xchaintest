@@ -136,6 +136,7 @@ class BasicTest:
 
     host = conf.default_host
     client_path = conf.client_path
+    client_addr = conf.client_addr
 
     # 合约部署账户
     account = "2111111111111111"

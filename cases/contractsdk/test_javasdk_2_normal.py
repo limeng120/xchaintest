@@ -50,17 +50,12 @@ class TestCall:
     @pytest.mark.p2
     def test_case02(self, input_args):
         """
-        给合约callc1 callc2充值
+        给合约callc1 callc2充值，调用callc1合约invoke方法，实现跨合约调用
         """
         print("\n调用callc1合约invoke方法，实现跨合约调用")
         self.trans_use(self.c1name, 1, input_args)
         self.trans_use(self.c2name, 1000, input_args)
 
-    @pytest.mark.p2
-    def test_case03(self, input_args):
-        """
-        调用callc1合约invoke方法，实现跨合约调用
-        """
         print("\n 调用callc1合约invoke方法，实现跨合约调用")
         err, self.test_befor = input_args.test.xlib.get_balance(account="test")
         invoke_args = {"to": "test"}
@@ -70,11 +65,6 @@ class TestCall:
         )
         assert err == 0, "调用callc1合约invoke方法，实现跨合约调用 失败" + result
 
-    def test_case04(self, input_args):
-        """
-        查询callc1 callc2 test余额
-        """
-        print("\n 查询callc1 callc2 test余额")
         err, c1_balance = input_args.test.xlib.get_balance(account=self.c1name)
         assert err == 0, "查询" + self.c1name + "余额 失败" + c1_balance
         assert c1_balance == "0", self.c1name + "账户不为0 " + c1_balance

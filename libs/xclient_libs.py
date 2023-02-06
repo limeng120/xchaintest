@@ -296,14 +296,14 @@ class Xlibs:
         acl_str = json.dumps(acl)
 
         # 2.准备desc文件
-        desc_file = "output/account.json"
+        account_file = "output/account.json"
         account_desc = {
             "module_name": "xkernel",
             "method_name": "NewAccount",
             "contract_name": "$acl",
             "args": {"account_name": kwargs["account_name"], "acl": acl_str},
         }
-        desc = os.path.join(self.conf.client_path, desc_file)
+        desc = os.path.join(self.conf.client_path, account_file)
         if not os.path.exists(desc):
             file2 = open(desc, mode="a", encoding="UTF-8")
             file2.close()
@@ -311,7 +311,7 @@ class Xlibs:
             json.dump(account_desc, desc_file)
             desc_file.close()
         # 3.执行创建账户命令
-        err, result = self.create_contract_account(desc=desc_file, **kwargs)
+        err, result = self.create_contract_account(desc=account_file, **kwargs)
         return err, result
 
     def deploy_contract(
