@@ -27,7 +27,7 @@ class TestPreAcl:
         cname = "gn_MultiSign"
 
         # 创建合约账户
-        aks = [input_args.conf.addrs[0], input_args.conf.addrs[1]]
+        aks = [input_args.addrs[0], input_args.addrs[1]]
         err, result = input_args.test.xlib.create_contract_account2(
             aks, account_name=account
         )

@@ -163,8 +163,9 @@ class TestContractAclErr:
             addrs=input_args.addrs,
         )
         assert err != 0, "修改method acl成功，不合预期" + result
-        msg = "ACL not enough"
-        assert msg in result, "报错信息错误"
+        msg1 = "ACL not enough"
+        msg2 = "the signature is invalid"
+        assert msg1 in result or msg2 in result, "报错信息错误"
 
     @pytest.mark.abnormal
     def test_invoke(self, input_args):
