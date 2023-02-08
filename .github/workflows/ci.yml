@@ -52,3 +52,4 @@ jobs:
       - name: Test with pytest
         run: |
           bash run_case.sh basic
+          bash run_case.sh highlevel
