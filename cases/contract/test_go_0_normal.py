@@ -2,6 +2,7 @@
 说明: 测试go合约 部署、调用、查询、升级
 """
 import json
+import time
 import pytest
 
 
@@ -45,7 +46,7 @@ class TestGoNative:
         txid = input_args.test.xlib.get_txid_from_res(result)
         err, result = input_args.test.xlib.wait_tx_on_chain(txid)
         assert err == 0, result
-
+        time.sleep(2)
         err, result_query = input_args.test.xlib.query_acc_contract(
             contract_account, self.cname
         )
@@ -93,7 +94,7 @@ class TestGoNative:
         txid = input_args.test.xlib.get_txid_from_res(result)
         err, result = input_args.test.xlib.wait_tx_on_chain(txid)
         assert err == 0, result
-
+        time.sleep(2)
         err, result_query = input_args.test.xlib.query_acc_contract(
             contract_account, self.cname
         )

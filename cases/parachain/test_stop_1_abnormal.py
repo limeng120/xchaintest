@@ -19,7 +19,7 @@ class TestStopChainErr:
             name="hixpoa1", keys="output/data/alice"
         )
         assert err != 0, "非admin节点停用链成功，不符合预期：" + result
-        msg = "invoke failed+http.StatusForbidden"
+        msg = "invoke failed+unAuthorized"
         assert msg in result, "报错信息错误"
 
     @pytest.mark.abnormal

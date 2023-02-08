@@ -39,7 +39,7 @@ class TestUpdateConErr:
 
         # 查询当前共识版本
         err, result = input_args.test.xlib.consensus_status()
-        assert err != 0, result
+        assert err == 0, result
         result = json.loads(result)
         version = result["version"]
 

@@ -17,7 +17,7 @@ class TestStopChain:
         err, result = input_args.test.pchain.stop_chain(name=name)
         assert err == 0, result
         # 当node1不是admin时，需用node2重试stopChain
-        if "failed+http.StatusForbidden" in result:
+        if "failed+unAuthorized" in result:
             err, result = input_args.test.pchain.stop_chain(
                 name=name, keys=input_args.keys[1]
             )

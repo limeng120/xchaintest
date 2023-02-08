@@ -32,7 +32,7 @@ go build -o ../../client/goTemplate/features features/main.go
 ### 3.运行用例
 ```
 sh run_case.sh basic   # 执行基本功能用例，运行时间约10min
-sh run_case.sh highlevel # 执行高阶功能的用例，运行时间约1h
+sh run_case.sh highlevel # 执行高阶功能的用例，运行时间约75min
 ```
 
 ### 4.调试用例

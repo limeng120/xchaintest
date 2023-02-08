@@ -20,7 +20,7 @@ class TestGroupErr:
             name="hixpoa1", admin=admin, keys="output/data/alice"
         )
         assert err != 0, "非管理员修改平行链群组信息成功，不符合预期：" + result
-        msg = "invoke failed+http.StatusForbidden"
+        msg = "invoke failed+unAuthorized"
         assert msg in result, "报错信息错误"
 
     @pytest.mark.abnormal
@@ -104,5 +104,5 @@ class TestGroupErr:
             name="hixpoa1", keys="output/data/alice"
         )
         assert err != 0, "非管理员，查看群组链成功，不符合预期：" + result
-        msg = "http.StatusForbidden"
+        msg = "unAuthorized"
         assert msg in result, "报错信息错误"

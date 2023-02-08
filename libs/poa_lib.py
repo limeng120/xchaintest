@@ -18,7 +18,7 @@ class Poa(Common):
         通过合约查询候选人，在变更后立即可查
         """
         err, result = self.xlib.consensus_invoke(
-            type="poa", method="get_validates", **kwargs
+            type="poa", method="getValidates", **kwargs
         )
         return err, result
 
