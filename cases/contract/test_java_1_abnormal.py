@@ -16,7 +16,7 @@ class TestJavaNativeErr:
     ca = "XC9876543210987654@xuper"
     deploy = {"creator": "abc"}
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署java合约资源不足")
     def test_case01(self, input_args):
         """
         重复部署
@@ -31,7 +31,7 @@ class TestJavaNativeErr:
         msg = "already exists"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署java合约资源不足")
     def test_case02(self, input_args):
         """
         使用普通账号部署合约
@@ -46,7 +46,7 @@ class TestJavaNativeErr:
         msg = "Key not found"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署java合约资源不足")
     def test_case03(self, input_args):
         """
         使用不存在的合约账号，部署合约
@@ -60,7 +60,7 @@ class TestJavaNativeErr:
         msg = "Key not found"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署java合约资源不足")
     def test_case04(self, input_args):
         """
         升级合约，用非部署账号
@@ -73,7 +73,7 @@ class TestJavaNativeErr:
         msg = "verify contract owner permission failed"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署java合约资源不足")
     def test_case05(self, input_args):
         """
         升级合约，用部署账号对应的普通账号
@@ -87,7 +87,7 @@ class TestJavaNativeErr:
         msg = "verify contract owner permission failed"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署java合约资源不足")
     def test_case06(self, input_args):
         """
         升级不存在的合约

@@ -152,3 +152,6 @@ elif [ "$type" == "highlevel" ];then
 else
     echo "please input args: basic or highlevel"
 fi
+
+err=$(cat result/*|grep "failure message"|wc -l)
+exit $err
