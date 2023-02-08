@@ -51,5 +51,5 @@ jobs:
           go build -o ../../client/goTemplate/features features/main.go
       - name: Test with pytest
         run: |
-          bash run_case.sh basic
-          bash run_case.sh highlevel
+          bash run_case.sh basic || tail xuperchain/testnet/node1/logs/xchain.log
+          bash run_case.sh highlevel || tail xuperchain/testnet/node1/logs/xchain.log
