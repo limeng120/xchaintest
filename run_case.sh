@@ -143,4 +143,9 @@ else
 fi
 
 err=$(cat result/*|grep "failure message"|wc -l)
+if [ $? -ne 0 ];then
+    echo "run failed, logs"
+    cat xuperchain/testnet/node1/logs/nohup.out
+    tail xuperchain/testnet/node1/logs/xchain.log.wf
+fi
 exit $err
