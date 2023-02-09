@@ -15,10 +15,18 @@ result_dir=${WORKSPACE}/result
 rm -rf $result_dir
 mkdir -p $result_dir
 
+function showlog()
+{
+    echo "run failed, logs"
+    cat xuperchain/testnet/node1/logs/nohup.out
+    tail xuperchain/testnet/node1/logs/xchain.log.wf
+}
+
 function checkhealth()
 {
     pytest $args cases/test_env.py::TestEnv::test_trunk_height
     if [ $? -ne 0 ];then
+        showlog
         exit 1
     fi
 }
@@ -144,8 +152,6 @@ fi
 
 err=$(cat result/*|grep "failure message"|wc -l)
 if [ $err -ne 0 ];then
-    echo "run failed, logs"
-    cat xuperchain/testnet/node1/logs/nohup.out
-    tail xuperchain/testnet/node1/logs/xchain.log.wf
+    showlog
 fi
 exit $err
