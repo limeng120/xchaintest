@@ -24,7 +24,7 @@ function checkhealth()
 }
 function basic()
 {
-    echo "=======环境检测 ======="
+    echo "=======测试环境准备======="
     pytest $args cases/test_env.py --junit-xml=$result_dir/test_env.xml
 
     echo "=======账号测试 ======="
@@ -73,68 +73,57 @@ function tdpos_test()
 {
     echo "=======升级共识：tdpos 2矿工 ======="
     pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case01
-
-    echo "=======测试环境：tdpos 2矿工 ======="
-    echo "=======环境检测 ======="
-    pytest $args cases/test_env.py --junit-xml=$result_dir/test_tdpos_env.xml
+    checkhealth
     echo "=======tdpos共识测试 ======="
     pytest $args cases/consensus/tdpos --type tdpos --junit-xml=$result_dir/test_tdpos.xml
+    checkhealth
 }
 
 function xpos_test()
 {
     echo "=======升级共识：xpos 2矿工 ======="
     pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case06
-
-    echo "=======测试环境：xpos 2矿工 ======="
-    echo "=======环境检测 ======="
-    pytest $args cases/test_env.py --junit-xml=$result_dir/test_xpos_env.xml
+    checkhealth
     echo "=======xpos共识测试 ======="
     pytest $args cases/consensus/tdpos --type xpos --junit-xml=$result_dir/test_xpos.xml
+    checkhealth
 }
 
 function poa_test()
 {
     echo "=======升级共识：poa 2矿工 ======="
     pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case02
-
-    echo "=======测试环境：poa 2矿工 ======="
-    echo "=======环境检测 ======="
-    pytest $args cases/test_env.py --junit-xml=$result_dir/test_poa_env.xml
+    checkhealth
     echo "=======poa共识测试 ======="
     pytest $args cases/consensus/poa --type poa --junit-xml=$result_dir/test_poa.xml
+    checkhealth
 }
 
 function xpoa_test()
 {
     echo "=======升级共识：xpoa 2矿工 ======="
     pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case04
-
-    echo "=======测试环境：xpoa 2矿工 ======="
-    echo "=======环境检测 ======="
-    pytest $args cases/test_env.py --junit-xml=$result_dir/test_xpoa_env.xml
+    checkhealth
     echo "=======xpoa共识测试 ======="
     pytest $args cases/consensus/poa --type xpoa --junit-xml=$result_dir/test_xpoa.xml
+    checkhealth
 }
 
 function single_test()
 {
     echo "=======升级共识：single ======="
     pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case08
-
-    echo "=======测试环境：single ======="
-    echo "=======环境检测 ======="
-    pytest $args cases/test_env.py --junit-xml=$result_dir/test_pow_env.xml
+    checkhealth
     echo "=======single共识测试 ======="
     pytest $args cases/consensus/single --junit-xml=$result_dir/test_single.xml
+    checkhealth
 }
 
 function contractsdk_test()
 {
-    echo "=======环境检测 ======="
-    pytest $args cases/test_env.py --junit-xml=$result_dir/test_env.xml
     echo "=======合约sdk测试 ======="
     pytest $args cases/contractsdk --junit-xml=$result_dir/test_contractsdk.xml
+    checkhealth
 }
 
 

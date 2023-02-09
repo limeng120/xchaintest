@@ -40,5 +40,5 @@ jobs:
           sleep 15
       - name: Test with pytest
         run: |
-          bash run_case.sh basic || tail xuperchain/testnet/node1/logs/xchain.log && tail xuperchain/testnet/node1/logs/nohup.out && exit 1
-          bash run_case.sh highlevel || tail xuperchain/testnet/node1/logs/xchain.log && tail xuperchain/testnet/node1/logs/nohup.out  && exit 1
+          bash run_case.sh basic || cat xuperchain/testnet/node1/logs/nohup.out && exit 1
+          bash run_case.sh highlevel || cat  xuperchain/testnet/node1/logs/nohup.out  && exit 1
