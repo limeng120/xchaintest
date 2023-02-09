@@ -121,7 +121,7 @@ class Common:
         if err != 0:
             return err, result
 
-        # 部署go native合约
+        # 部署合约
         cname = "hello_cpp"
         file = "cppTemplate/counter.wasm"
         desc = json.dumps({"creator": addr})

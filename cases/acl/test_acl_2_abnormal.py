@@ -16,8 +16,9 @@ class TestAccounAclErr:
     # 被转账者
     to_account = "XC1111111111111211@xuper"
     # 合约部署，调用
-    file = "goTemplate/counter"
-    cname = "gn_nat_err"
+    file = "cppTemplate/counter.wasm"
+    cname = "multisign"
+    cname = "sign_err"
 
     @pytest.mark.abnormal
     def test_transfer1(self, input_args):
@@ -67,9 +68,9 @@ class TestAccounAclErr:
     @pytest.mark.abnormal
     def test_deploy(self, input_args):
         """
-        部署goNative合约，签名不足
+        部署合约，签名不足
         """
-        print("\n【异常】部署goNative合约，签名不足")
+        print("\n【异常】部署合约，签名不足")
         # 合约账号的acl是node1 node2
         account = "XC" + self.account + "@" + input_args.conf.name
         deploy = {"creator": "abc"}
@@ -78,19 +79,19 @@ class TestAccounAclErr:
         addrs = [input_args.addrs[0]]
         input_args.test.xclient.write_addrs(account, addrs)
         err, result = input_args.test.xlib.deploy_contract(
-            "native", "go", self.cname, self.file, account, args, isMulti=""
+            "wasm", "cpp", self.cname, self.file, account, args, isMulti=""
         )
         err, result = input_args.test.xlib.multi_sign(keys=keys)
-        assert err != 0, "部署go native合约成功，不合预期： " + result
+        assert err != 0, "部署合约成功，不合预期： " + result
         msg = "the signature is invalid or not match the address"
         assert msg in result, "报错信息错误"
 
     @pytest.mark.abnormal
     def test_invoke(self, input_args):
         """
-        调用goNative合约，签名无效
+        调用合约，签名无效
         """
-        print("\n【异常】调用goNative合约，签名无效")
+        print("\n【异常】调用合约，签名无效")
         # 合约账号的acl是node1 node2
         account = "XC" + self.account + "@" + input_args.conf.name
         invoke_args = {"key": "dudu"}
@@ -99,10 +100,10 @@ class TestAccounAclErr:
         addrs = [input_args.addrs[0]]
         input_args.test.xclient.write_addrs(account, addrs)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "increase", args, isMulti="", account=account
+            "wasm", self.cname, "increase", args, isMulti="", account=account
         )
         err, result = input_args.test.xlib.multi_sign(keys=keys)
-        assert err != 0, "调用go native合约失败： " + result
+        assert err != 0, "调用合约失败： " + result
         msg = "the signature is invalid or not match the address"
         assert msg in result, "报错信息错误"
 

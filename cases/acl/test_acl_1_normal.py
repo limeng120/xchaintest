@@ -17,7 +17,7 @@ class TestAccounAcl:
     # 被转账者
     to_account = "XC1111111111111211@xuper"
     # 合约调用
-    cname = "gn_MultiSign"
+    cname = "multisign"
 
     @pytest.mark.p0
     def test_transfer1(self, input_args):
@@ -71,16 +71,16 @@ class TestAccounAcl:
     @pytest.mark.p0
     def test_invoke(self, input_args):
         """
-        调用goNative合约
+        调用合约
         """
-        print("\n调用goNative合约")
+        print("\n调用合约")
         # node3调用increase
         invoke_args = {"key": "dudu"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "increase", args, keys=input_args.keys[1]
+            "wasm", self.cname, "increase", args, keys=input_args.keys[1]
         )
-        assert err == 0, "调用go native合约失败： " + result
+        assert err == 0, "调用合约失败： " + result
 
         # 等tx上链
         txid = input_args.test.xlib.get_txid_from_res(result)
@@ -97,10 +97,10 @@ class TestAccounAcl:
         addrs = [input_args.addrs[0], input_args.addrs[1]]
         input_args.test.xclient.write_addrs(account, addrs)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "get", args, isMulti="", account=account
+            "wasm", self.cname, "get", args, isMulti="", account=account
         )
         err, result = input_args.test.xlib.multi_sign(keys=signkeys)
-        assert err == 0, "调用go native合约失败： " + result
+        assert err == 0, "调用合约失败： " + result
 
         # 等tx上链
         txid = input_args.test.xlib.get_txid_from_res(result)

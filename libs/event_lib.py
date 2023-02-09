@@ -82,21 +82,6 @@ class Event:
                 "value": value,
             }
         )
-        # cname = "gn_counter"
-        # # for cname in ["java_counter", "gn_counter"]:
-        # err, result = self.xlib.invoke_contract("native", cname, method, args)
-        # assert err == 0, "调用" + cname + "合约失败： " + result
-        # txid = self.xlib.get_txid_from_res(result)
-        # value = self.xlib.get_value_from_res(result)
-        # invoke_res.append(
-        #     {
-        #         "txid": txid,
-        #         "contract": cname,
-        #         "name": method,
-        #         "key": key,
-        #         "value": value,
-        #     }
-        # )
         return invoke_res
 
     def gen_expect_event(self, event_filter, invoke_res, empty_event):

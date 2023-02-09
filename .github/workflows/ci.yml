@@ -34,7 +34,11 @@ jobs:
           git clone https://github.com/xuperchain/xuperchain.git
           git clone https://github.com/OpenAtomFoundation/xupercore.git
           cd xuperchain && echo "replace github.com/xuperchain/xupercore => ../xupercore" >> go.mod
-          make && make testnet && cd testnet/ && sh control_all.sh start
+          make && make testnet && cd testnet/
+          sed -i' ' 's#level: debug#level: warn#g' node1/conf/log.yaml
+          sed -i' ' 's#level: debug#level: warn#g' node2/conf/log.yaml
+          sed -i' ' 's#level: debug#level: warn#g' node3/conf/log.yaml
+          sh control_all.sh start
           pwd
           cd ../.. && cp xuperchain/output/bin/xchain-cli client/bin/
           sleep 15

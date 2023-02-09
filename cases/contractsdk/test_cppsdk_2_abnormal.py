@@ -25,7 +25,7 @@ class TestFeatursErr:
 
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "transfer", args
+            "wasm", self.cname, "transfer", args
         )
         assert err != 0, "转账成功， 不符合预期： " + result
         return result
@@ -41,7 +41,7 @@ class TestFeatursErr:
         }
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "query_tx", args
+            "wasm", self.cname, "query_tx", args
         )
         assert err == 0, "查询不存在的tx成功： " + result
         msg = "contract response: "
@@ -58,7 +58,7 @@ class TestFeatursErr:
         }
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "query_block", args
+            "wasm", self.cname, "query_block", args
         )
         assert err == 0, "查询getBlock区块失败： " + result
         msg = "contract response: "
@@ -78,7 +78,7 @@ class TestFeatursErr:
         for put_args in invoke_args:
             args = json.dumps(put_args)
             err, result = input_args.test.xlib.invoke_contract(
-                "native", self.cname, "put", args
+                "wasm", self.cname, "put", args
             )
             assert err != 0, "调put方法,key,value为null成功, 不符合预期： " + result
             msg = "expect string value, got <nil>"
@@ -98,7 +98,7 @@ class TestFeatursErr:
         for put_args in invoke_args:
             args = json.dumps(put_args)
             err, result = input_args.test.xlib.invoke_contract(
-                "native", self.cname, "put", args
+                "wasm", self.cname, "put", args
             )
             assert err != 0, "调put方法,key,value为小数成功,不符合预期： " + result
             msg = "expect string value, got 1.34"
@@ -119,7 +119,7 @@ class TestFeatursErr:
         for put_args in invoke_args:
             args = json.dumps(put_args)
             err, result = input_args.test.xlib.invoke_contract(
-                "native", self.cname, "put", args
+                "wasm", self.cname, "put", args
             )
             assert err != 0, "异常条件put不传/漏传key成功， 不符合预期： " + result
             msg = "contract error status:500 message:missing key"
@@ -130,7 +130,7 @@ class TestFeatursErr:
         for put_args in invoke_args:
             args = json.dumps(put_args)
             err, result = input_args.test.xlib.invoke_contract(
-                "native", self.cname, "put", args
+                "wasm", self.cname, "put", args
             )
             assert err != 0, "异常条件put不传/漏传value成功， 不符合预期： " + result
             msg = "contract error status:500 message:missing value"
@@ -145,7 +145,7 @@ class TestFeatursErr:
         invoke_args = {"key": "test$", "value": "value$"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "put", args, amount=-10
+            "wasm", self.cname, "put", args, amount=-10
         )
         assert err != 0, "put方法，写入kv,并给合约转账,amount设为负数成功,不符合预期：" + result
         msg = "Amount in transaction can not be negative number"
@@ -159,14 +159,14 @@ class TestFeatursErr:
         invoke_args = {"key": None}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", args
+            "wasm", self.cname, "get", args
         )
         assert err != 0, "get方法，key为null成功,不符合预期： " + result
         msg = "expect string value, got <nil>"
         assert msg in result, "报错信息错误"
 
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", json.dumps({})
+            "wasm", self.cname, "get", json.dumps({})
         )
         assert err != 0, "get方法，key为null金额成功,不符合预期： " + result
         msg = "message:failed"
@@ -180,7 +180,7 @@ class TestFeatursErr:
         invoke_args = {"key": 1.34}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", args
+            "wasm", self.cname, "get", args
         )
         assert err != 0, "get方法，key为小数 成功,不符合预期：" + result
         msg = "bad key key, expect string value, got 1.34"
@@ -194,7 +194,7 @@ class TestFeatursErr:
         invoke_args = {"key": "notexit"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", args
+            "wasm", self.cname, "get", args
         )
         assert err != 0, "get不存在的key成功,不符合预期：" + result
         msg = "contract error status:500 message:failed"
@@ -209,7 +209,7 @@ class TestFeatursErr:
         invoke_args = {"key": "test$"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "get", args, amount=-10
+            "wasm", self.cname, "get", args, amount=-10
         )
         assert err != 0, "get方法，写入kv,并给合约转账,amount设为负数成功,不符合预期：" + result
         msg = "Amount in transaction can not be negative number"
@@ -230,7 +230,7 @@ class TestFeatursErr:
         for iter_args in invoke_args:
             args = json.dumps(iter_args)
             err, result = input_args.test.xlib.invoke_contract(
-                "native", self.cname, "iterator", args
+                "wasm", self.cname, "iterator", args
             )
             assert err != 0, "iterator 迭代访问,start为空成功,不符合预期： " + result
             msg = "500 message:missing start"
@@ -246,7 +246,7 @@ class TestFeatursErr:
         for iter_args in invoke_args:
             args = json.dumps(iter_args)
             err, result = input_args.test.xlib.invoke_contract(
-                "native", self.cname, "iterator", args
+                "wasm", self.cname, "iterator", args
             )
             assert err != 0, "iterator 迭代访问,limit为空成功,不符合预期： " + result
             msg = "500 message:missing limit"
@@ -261,7 +261,7 @@ class TestFeatursErr:
         invoke_args = {"contract": "counter_gn11", "key": "qakey", "method": "increase"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "call", args
+            "wasm", self.cname, "call", args
         )
         assert err != 0, "call:调用不存在的合约 成功,不符合预期： " + result
         msg = "contract error status:500 message:call failed"
@@ -277,7 +277,7 @@ class TestFeatursErr:
 
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "call", args
+            "wasm", self.cname, "call", args
         )
         assert err != 0, "调用不存在的合约方法  成功,不符合预期： " + result
         msg = "contract error status:500 message:call failed"
@@ -298,28 +298,28 @@ class TestFeatursErr:
         for loadargs in invoke_args:
             args = json.dumps(loadargs)
             err, result = input_args.test.xlib.invoke_contract(
-                "native", self.cname, "json_load_dump", args
+                "wasm", self.cname, "json_load_dump", args
             )
             assert err != 0, "json_load_dump 读取参数value格式不对且成功,不符合预期： " + result
             msg = "code = Unknown desc = Err:500-50501-contract invoke failed+trap error:allocate exception"
             assert msg in result, "报错信息错误"
 
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "json_load_dump", json.dumps({"value": 3.14})
+            "wasm", self.cname, "json_load_dump", json.dumps({"value": 3.14})
         )
         assert err != 0, "json_load_dump 读取参数value为小数且成功,不符合预期： " + result
         msg = "bad key value, expect string value, got 3.14"
         assert msg in result, "报错信息错误"
 
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "json_load_dump", json.dumps({"value": True})
+            "wasm", self.cname, "json_load_dump", json.dumps({"value": True})
         )
         assert err != 0, "json_load_dump 读取参数value为bool且成功,不符合预期： " + result
         msg = "bad key value, expect string value, got true"
         assert msg in result, "报错信息错误"
 
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "json_load_dump", json.dumps({"value": 22})
+            "wasm", self.cname, "json_load_dump", json.dumps({"value": 22})
         )
         assert err != 0, "json_load_dump 读取参数value为数字且成功,不符合预期： " + result
         msg = "bad key value, expect string value, got 22"
@@ -370,7 +370,7 @@ class TestFeatursErr:
         invoke_args = {"to": "testAccount", "amount": "1.5"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", "features999", "transfer", args
+            "wasm", "features999", "transfer", args
         )
         assert err != 0, "features合约不足时转账成功, 不符合预期： " + result
         msg = "transfer failed"

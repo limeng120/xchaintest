@@ -14,7 +14,7 @@ class TestContractAcl:
     # 多签
     account = "2111111111111112"
     # 合约调用
-    cname = "gn_MultiSign"
+    cname = "multisign"
 
     @pytest.mark.p0
     def test_update_acl(self, input_args):
@@ -81,15 +81,15 @@ class TestContractAcl:
     @pytest.mark.p0
     def test_invoke(self, input_args):
         """
-        调用goNative合约，node2可调用成功
+        调用合约，node2可调用成功
         """
-        print("\n调用goNative合约")
+        print("\n调用合约")
         invoke_args = {"key": "dudu"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "increase", args, keys=input_args.keys[1]
+            "wasm", self.cname, "increase", args, keys=input_args.keys[1]
         )
-        assert err == 0, "调用go native合约失败： " + result
+        assert err == 0, "调用合约失败： " + result
         # 等tx上链
         txid = input_args.test.xlib.get_txid_from_res(result)
         err, result = input_args.test.xlib.wait_tx_on_chain(txid)

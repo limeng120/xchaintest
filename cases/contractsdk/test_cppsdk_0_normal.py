@@ -38,7 +38,7 @@ class TestFeatures1:
         invoke_args = {"key": "test1", "value": "value1"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "put", args
+            "wasm", self.cname, "put", args
         )
         assert err == 0, "调put方法,写入1个kv 失败" + result
 
@@ -51,7 +51,7 @@ class TestFeatures1:
         invoke_args = {"key": "test1"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", args
+            "wasm", self.cname, "get", args
         )
         assert err == 0, "调get方法,查询1个kv 失败" + result
 
@@ -67,7 +67,7 @@ class TestFeatures1:
         }
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "put", args
+            "wasm", self.cname, "put", args
         )
         assert err == 0, "调put方法：key和value长度1K, 失败" + result
 
@@ -80,7 +80,7 @@ class TestFeatures1:
         invoke_args = {"key": "test" + self.widthCount}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", args
+            "wasm", self.cname, "get", args
         )
         assert err == 0, "调get方法,key和value长度1k 失败" + result
         # value值长度是1024
@@ -95,7 +95,7 @@ class TestFeatures1:
         invoke_args = {"key": "admin" + self.widthCount, "value": "adminvalue"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "put", args
+            "wasm", self.cname, "put", args
         )
         assert err == 0, "调put方法：key长度1K, 失败" + result
 
@@ -108,7 +108,7 @@ class TestFeatures1:
         invoke_args = {"key": "admin" + self.widthCount}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", args
+            "wasm", self.cname, "get", args
         )
         assert err == 0, "调get方法,key长度1k 失败" + result
 
@@ -121,7 +121,7 @@ class TestFeatures1:
         invoke_args = {"key": "case1", "value": "lkvalue" + self.widthCount}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "put", args
+            "wasm", self.cname, "put", args
         )
         assert err == 0, "调put方法,vaue长度1k 失败" + result
 
@@ -134,7 +134,7 @@ class TestFeatures1:
         invoke_args = {"key": "case1"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", args
+            "wasm", self.cname, "get", args
         )
         assert err == 0, "调get方法,vaue长度1k 失败" + result
 
@@ -147,11 +147,11 @@ class TestFeatures1:
         invoke_args = {"key": "case1", "value": "qatestval1"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "put", args
+            "wasm", self.cname, "put", args
         )
         assert err == 0, "put已经加入的值 失败" + result
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", json.dumps({"key": "case1"})
+            "wasm", self.cname, "get", json.dumps({"key": "case1"})
         )
         assert err == 0 and "qatestval1" in result, "调get方法,查询已经加入的值 失败" + result
 
@@ -164,11 +164,11 @@ class TestFeatures1:
         invoke_args = {"key": "dudu", "value": " "}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "put", args
+            "wasm", self.cname, "put", args
         )
         assert err == 0, "put的value值为 失败" + result
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", json.dumps({"key": "dudu"})
+            "wasm", self.cname, "get", json.dumps({"key": "dudu"})
         )
         assert err == 0, "调get方法,查询已经加入的值 失败" + result
 
@@ -181,11 +181,11 @@ class TestFeatures1:
         invoke_args = {"key": " ", "value": "value2"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "put", args
+            "wasm", self.cname, "put", args
         )
         assert err == 0, "调put方法,key为空字符串" " 失败" + result
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", json.dumps({"key": " "})
+            "wasm", self.cname, "get", json.dumps({"key": " "})
         )
         assert err == 0, "调get方法,key为空字符串" " 失败" + result
 
@@ -198,11 +198,11 @@ class TestFeatures1:
         invoke_args = {"key": " ", "value": " "}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "put", args
+            "wasm", self.cname, "put", args
         )
         assert err == 0, "get方法,key,value都为空 失败" + result
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", json.dumps({"key": " "})
+            "wasm", self.cname, "get", json.dumps({"key": " "})
         )
         assert err == 0, "调get方法,key为空失败" + result
 
@@ -215,10 +215,10 @@ class TestFeatures1:
         invoke_args = {"key": "!)(%^&*()O:@_-></!#$^", "value": "!@#$%^&*()_+=?><|"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "put", args
+            "wasm", self.cname, "put", args
         )
         assert err == 0, "put的key,value为特殊字符 失败" + result
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "get", json.dumps({"key": "!)(%^&*()O:@_-></!#$^"})
+            "wasm", self.cname, "get", json.dumps({"key": "!)(%^&*()O:@_-></!#$^"})
         )
         assert err == 0, "调get方法,查询特殊字符 失败" + result
