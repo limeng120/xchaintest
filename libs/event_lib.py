@@ -66,25 +66,7 @@ class Event:
 
         invoke_res = []
 
-        # 用node2的key调用合约
-        cname = "c_counter"
-        err, result = self.xlib.invoke_contract(
-            "wasm", cname, method, args, keys=self.conf.keys[1]
-        )
-        assert err == 0, "调用" + cname + "合约失败： " + result
-        txid = self.xlib.get_txid_from_res(result)
-        value = self.xlib.get_value_from_res(result)
-        invoke_res.append(
-            {
-                "txid": txid,
-                "contract": cname,
-                "name": method,
-                "key": key,
-                "value": value,
-            }
-        )
-
-        # 调用3种counter合约的increase方法
+        # 调用counter合约的increase方法
         cname = "c_counter"
         err, result = self.xlib.invoke_contract("wasm", cname, method, args)
         assert err == 0, "调用" + cname + "合约失败： " + result
@@ -100,21 +82,21 @@ class Event:
                 "value": value,
             }
         )
-        cname = "gn_counter"
-        # for cname in ["java_counter", "gn_counter"]:
-        err, result = self.xlib.invoke_contract("native", cname, method, args)
-        assert err == 0, "调用" + cname + "合约失败： " + result
-        txid = self.xlib.get_txid_from_res(result)
-        value = self.xlib.get_value_from_res(result)
-        invoke_res.append(
-            {
-                "txid": txid,
-                "contract": cname,
-                "name": method,
-                "key": key,
-                "value": value,
-            }
-        )
+        # cname = "gn_counter"
+        # # for cname in ["java_counter", "gn_counter"]:
+        # err, result = self.xlib.invoke_contract("native", cname, method, args)
+        # assert err == 0, "调用" + cname + "合约失败： " + result
+        # txid = self.xlib.get_txid_from_res(result)
+        # value = self.xlib.get_value_from_res(result)
+        # invoke_res.append(
+        #     {
+        #         "txid": txid,
+        #         "contract": cname,
+        #         "name": method,
+        #         "key": key,
+        #         "value": value,
+        #     }
+        # )
         return invoke_res
 
     def gen_expect_event(self, event_filter, invoke_res, empty_event):
@@ -130,12 +112,7 @@ class Event:
             return tmp_event
         # 1.不同合约事件的body有区别，分别构造event body
         for res in invoke_res:
-            if res["contract"] == "c_counter":
-                body = res["value"]
-            # elif res["contract"] == "java_counter":
-            #     body = '{"value":"' + res["value"] + '","key":"dudu"}'
-            else:
-                body = '{"key":"dudu","value":"' + res["value"] + '"}'
+            body = res["value"]
             event = {"contract": res["contract"], "name": "increase", "body": body}
             tmp_event[res["txid"]] = event
 

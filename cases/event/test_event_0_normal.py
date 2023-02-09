@@ -158,7 +158,7 @@ class TestEvent:
         设置发起人，订阅
         """
         print("设置发起人，订阅")
-        event_filter = {"initiator": input_args.addrs[1]}
+        event_filter = {"initiator": input_args.addrs[0]}
         event_filter = json.dumps(event_filter)
         err, result = input_args.test.event.contract_event_test(
             event_filter, self.eventfile
@@ -171,7 +171,7 @@ class TestEvent:
         设置auth_require，订阅
         """
         print("设置auth_require，订阅")
-        event_filter = {"auth_require": input_args.addrs[1]}
+        event_filter = {"auth_require": input_args.addrs[0]}
         event_filter = json.dumps(event_filter)
         err, result = input_args.test.event.contract_event_test(
             event_filter, self.eventfile

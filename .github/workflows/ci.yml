@@ -29,11 +29,6 @@ jobs:
         uses: actions/setup-go@v1
         with:
           go-version: ${{ matrix.go-version }}
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
       - name: Deploy xchainnet for test
         run: |
           git clone https://github.com/xuperchain/xuperchain.git
@@ -43,12 +38,6 @@ jobs:
           pwd
           cd ../.. && cp xuperchain/output/bin/xchain-cli client/bin/
           sleep 15
-      - name: Complie Go contract
-        run: |
-          git clone https://github.com/xuperchain/contract-sdk-go.git
-          cd contract-sdk-go/example
-          go build -o ../../client/goTemplate/counter counter/main.go
-          go build -o ../../client/goTemplate/features features/main.go
       - name: Test with pytest
         run: |
           bash run_case.sh basic || tail xuperchain/testnet/node1/logs/xchain.log && tail xuperchain/testnet/node1/logs/nohup.out

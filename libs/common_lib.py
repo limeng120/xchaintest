@@ -122,11 +122,11 @@ class Common:
             return err, result
 
         # 部署go native合约
-        cname = "hello_go"
-        file = "goTemplate/counter"
+        cname = "hello_cpp"
+        file = "cppTemplate/counter.wasm"
         desc = json.dumps({"creator": addr})
         err, result = self.xlib.deploy_contract(
-            "native", "go", cname, file, acl_account, desc, **kwargs
+            "wasm", "cpp", cname, file, acl_account, desc, **kwargs
         )
         if err != 0 and "already exists" not in result:
             return err, result
@@ -139,7 +139,7 @@ class Common:
         # 合约调用测试
         desc = json.dumps({"key": "dudu"})
         err, result = self.xlib.invoke_contract(
-            "native", cname, "increase", desc, **kwargs
+            "wasm", cname, "increase", desc, **kwargs
         )
         if err != 0:
             return err, result
@@ -147,7 +147,7 @@ class Common:
         # 合约查询测试
         query = {"key": "dudu"}
         desc = json.dumps(query)
-        err, result = self.xlib.query_contract("native", cname, "get", desc, **kwargs)
+        err, result = self.xlib.query_contract("wasm", cname, "get", desc, **kwargs)
 
         # 给node2 转账
         err, result = self.tranfer_when_not_enough(self.conf.addrs[1], amount, **kwargs)

@@ -31,7 +31,7 @@ class TestCall:
         assert err == 0, "查询" + account + "余额 失败" + after_account
         assert int(after_account) == int(befor_account) + int(amount)
 
-    @pytest.mark.skip("虚拟机部署java合约资源不足")
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case01(self, input_args):
         """
         部署callc1 callc2合约
@@ -47,7 +47,7 @@ class TestCall:
         )
         assert err == 0 or "exist" in result, "部署" + self.c2name + "合约失败： " + result
 
-    @pytest.mark.skip("虚拟机部署java合约资源不足")
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case02(self, input_args):
         """
         给合约callc1 callc2充值，调用callc1合约invoke方法，实现跨合约调用

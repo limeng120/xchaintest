@@ -14,7 +14,7 @@ class TestJavaNative:
     file = "javaTemplate/counter-0.1.0-jar-with-dependencies.jar"
     cname = "java_counter"
 
-    @pytest.mark.skip("虚拟机部署java合约资源不足")
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case01(self, input_args):
         """
         部署java合约
@@ -32,7 +32,7 @@ class TestJavaNative:
             err, result = input_args.test.xlib.wait_tx_on_chain(txid)
             assert err == 0, result
 
-    @pytest.mark.skip("虚拟机部署java合约资源不足")
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case02(self, input_args):
         """
         升级java合约，不带数据
@@ -53,7 +53,7 @@ class TestJavaNative:
         assert err == 0, "查询账户下的合约失败： " + result_query
         assert txid == result_query["txid"], "升级后，检查合约txid，不一致"
 
-    @pytest.mark.skip("虚拟机部署java合约资源不足")
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case03(self, input_args):
         """
         调用java合约
@@ -68,7 +68,7 @@ class TestJavaNative:
         err, result = input_args.test.xlib.wait_tx_on_chain(txid)
         assert err == 0, result
 
-    @pytest.mark.skip("虚拟机部署java合约资源不足")
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case04(self, input_args):
         """
         查询java合约
@@ -80,7 +80,7 @@ class TestJavaNative:
         )
         assert err == 0, "查询java合约失败： " + result
 
-    @pytest.mark.skip("虚拟机部署java合约资源不足")
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case05(self, input_args):
         """
         升级java合约，带数据
@@ -101,7 +101,7 @@ class TestJavaNative:
         assert err == 0, "查询账户下的合约失败： " + result_query
         assert txid == result_query["txid"], "升级后，检查合约txid，不一致"
 
-    @pytest.mark.skip("虚拟机部署java合约资源不足")
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case06(self, input_args):
         """
         调用java合约
@@ -116,7 +116,7 @@ class TestJavaNative:
         err, result = input_args.test.xlib.wait_tx_on_chain(txid)
         assert err == 0, result
 
-    @pytest.mark.skip("虚拟机部署java合约资源不足")
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case07(self, input_args):
         """
         查询java合约

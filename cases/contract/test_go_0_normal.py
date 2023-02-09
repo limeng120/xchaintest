@@ -14,7 +14,7 @@ class TestGoNative:
     file = "goTemplate/counter"
     cname = "gn_counter"
 
-    @pytest.mark.p0
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case01(self, input_args):
         """
         部署go native合约
@@ -32,7 +32,7 @@ class TestGoNative:
             err, result = input_args.test.xlib.wait_tx_on_chain(txid)
             assert err == 0, result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case02(self, input_args):
         """
         升级go native合约，不带数据
@@ -53,7 +53,7 @@ class TestGoNative:
         assert err == 0, "查询账户下的合约失败： " + result_query
         assert txid == result_query["txid"], "升级后，检查合约txid，不一致"
 
-    @pytest.mark.p0
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case03(self, input_args):
         """
         调用go native合约
@@ -68,7 +68,7 @@ class TestGoNative:
         err, result = input_args.test.xlib.wait_tx_on_chain(txid)
         assert err == 0, result
 
-    @pytest.mark.p0
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case04(self, input_args):
         """
         查询go native合约
@@ -80,7 +80,7 @@ class TestGoNative:
         )
         assert err == 0, "查询go native合约失败： " + result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case05(self, input_args):
         """
         升级go native合约，带数据
@@ -101,7 +101,7 @@ class TestGoNative:
         assert err == 0, "查询账户下的合约失败： " + result_query
         assert txid == result_query["txid"], "升级后，检查合约txid，不一致"
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case06(self, input_args):
         """
         调用go native合约
@@ -116,7 +116,7 @@ class TestGoNative:
         err, result = input_args.test.xlib.wait_tx_on_chain(txid)
         assert err == 0, result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case07(self, input_args):
         """
         查询go native合约

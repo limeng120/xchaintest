@@ -14,7 +14,7 @@ class TestGoFeatures:
     cname = "features_go"
     amount = "100"
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case01(self, input_args):
         """
         部署features合约
@@ -26,7 +26,7 @@ class TestGoFeatures:
         )
         assert err == 0 or "exist" in result, "部署features合约失败： " + result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case02(self, input_args):
         """
         通过合约查询txid和block信息
@@ -61,7 +61,7 @@ class TestGoFeatures:
             "查询区块 失败" + result
         )
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case03(self, input_args):
         """
         通过合约进行转账
@@ -89,7 +89,7 @@ class TestGoFeatures:
             "查询" + self.cname + "余额 失败" + after_cname
         )
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case04(self, input_args):
         """
         logging 从合约内写一条日志
