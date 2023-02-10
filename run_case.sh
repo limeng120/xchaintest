@@ -24,7 +24,7 @@ function showlog()
 
 function checkhealth()
 {
-    pytest $args cases/test_env.py::TestEnv::test_trunk_height
+    pytest "$args" cases/test_env.py::TestEnv::test_trunk_height
     if [ $? -ne 0 ];then
         showlog
         exit 1

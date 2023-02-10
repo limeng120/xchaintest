@@ -30,6 +30,8 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
       - name: Deploy xchainnet for test
+        with:
+          memory: 2048
         run: |
           git clone https://github.com/xuperchain/xuperchain.git
           git clone https://github.com/OpenAtomFoundation/xupercore.git
