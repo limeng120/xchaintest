@@ -1,5 +1,5 @@
 on: [push, pull_request]
-name: CI
+name: CI-BASIC
 jobs:
   test:
     strategy:
@@ -30,8 +30,6 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
       - name: Deploy xchainnet for test
-        with:
-          memory: 2048
         run: |
           git clone https://github.com/xuperchain/xuperchain.git
           git clone https://github.com/OpenAtomFoundation/xupercore.git
@@ -47,4 +45,3 @@ jobs:
       - name: Test with pytest
         run: |
           bash run_case.sh basic
-          bash run_case.sh highlevel
