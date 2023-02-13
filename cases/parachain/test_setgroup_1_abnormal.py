@@ -15,6 +15,8 @@ class TestGroupErr:
         非管理员修改平行链群组信息
         """
         print("\n 非管理员修改平行链群组信息")
+        output = "./output/data/alice"
+        input_args.test.xlib.create_account(output=output, lang="en", strength="1")
         admin = [input_args.addrs[0], input_args.addrs[1]]
         err, result = input_args.test.pchain.edit_chain_group(
             name="hixpoa1", admin=admin, keys="output/data/alice"

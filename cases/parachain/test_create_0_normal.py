@@ -9,7 +9,6 @@ class TestCreateChain:
     测试创建平行链
     """
 
-    # case01
     @pytest.mark.p1
     def test_case01(self, input_args):
         """

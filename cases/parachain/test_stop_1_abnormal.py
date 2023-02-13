@@ -15,6 +15,8 @@ class TestStopChainErr:
         普通节点无停用权限"
         """
         print("\n 普通节点停用权限，非admin节点")
+        output = "./output/data/alice"
+        input_args.test.xlib.create_account(output=output, lang="en", strength="1")
         err, result = input_args.test.pchain.stop_chain(
             name="hixpoa1", keys="output/data/alice"
         )

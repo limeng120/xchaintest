@@ -14,6 +14,7 @@ result_dir=${WORKSPACE}/result
 [ -z "${WORKSPACE}" ] && result_dir=$basepath/result
 rm -rf $result_dir
 mkdir -p $result_dir
+mkdir -p ./client/output
 
 function showlog()
 {
@@ -33,7 +34,7 @@ function checkhealth()
 function basic()
 {
     echo "=======账号测试 ======="
-    rm ./client/output -rf
+    rm ./client/output/* -rf
     pytest -m "not abnormal" $args cases/account --junit-xml=$result_dir/test_account.xml
     checkhealth
 
