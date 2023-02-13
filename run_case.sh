@@ -25,7 +25,7 @@ function showlog()
 
 function checkhealth()
 {
-    pytest -m "not abnormal" $args cases/test_env.py::TestEnv::test_trunk_height
+    pytest $args cases/test_env.py::TestEnv::test_trunk_height
     if [ $? -ne 0 ];then
         showlog
         exit 1
@@ -35,23 +35,23 @@ function basic()
 {
     echo "=======账号测试 ======="
     rm ./client/output/* -rf
-    pytest -m "not abnormal" $args cases/account --junit-xml=$result_dir/test_account.xml
+    pytest $args cases/account --junit-xml=$result_dir/test_account.xml
     checkhealth
 
     echo "=======acl测试 ======="
-    pytest -m "not abnormal" $args cases/acl --junit-xml=$result_dir/test_acl.xml
+    pytest $args cases/acl --junit-xml=$result_dir/test_acl.xml
     checkhealth
 
     echo "=======转账测试 ======="
-    pytest -m "not abnormal" $args cases/transfer --junit-xml=$result_dir/test_transfer.xml
+    pytest $args cases/transfer --junit-xml=$result_dir/test_transfer.xml
     checkhealth
 
     echo "=======合约测试 ======="
-    pytest -m "not abnormal" $args cases/contract --junit-xml=$result_dir/test_contract.xml
+    pytest $args cases/contract --junit-xml=$result_dir/test_contract.xml
     checkhealth
 
     echo "=======事件测试 ======="
-    pytest -m "not abnormal" $args cases/event --junit-xml=$result_dir/test_event.xml
+    pytest $args cases/event --junit-xml=$result_dir/test_event.xml
     checkhealth
 
     echo "=======基本功能测试完成======="
@@ -62,7 +62,7 @@ function pchain_test()
     # 平行链测试，如果在平行链执行，跳过下面的case
     if [ "$chain" == "xuper" ];then
         echo "=======平行链测试======="
-        pytest -m "not abnormal" $args cases/parachain --junit-xml=$result_dir/test_parachain.xml
+        pytest $args cases/parachain --junit-xml=$result_dir/test_parachain.xml
         checkhealth
         echo "=======平行链测试完成======="
     fi
@@ -71,69 +71,69 @@ function pchain_test()
 function update_test()
 {
     echo "=======共识升级测试======="
-    pytest -m "not abnormal" $args cases/update --junit-xml=$result_dir/test_update.xml
+    pytest $args cases/update --junit-xml=$result_dir/test_update.xml
     checkhealth
 }
 
 function tdpos_test()
 {
     echo "=======升级共识：tdpos 2矿工 ======="
-    pytest -m "not abnormal" cases/update/test_update_0_normal.py::TestUpdateCons::test_case01
+    pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case01
     checkhealth
     echo "=======tdpos共识测试 ======="
-    pytest -m "not abnormal" $args cases/consensus/tdpos --type tdpos --junit-xml=$result_dir/test_tdpos.xml
+    pytest $args cases/consensus/tdpos --type tdpos --junit-xml=$result_dir/test_tdpos.xml
     checkhealth
 }
 
 function xpos_test()
 {
     echo "=======升级共识：xpos 2矿工 ======="
-    pytest -m "not abnormal" cases/update/test_update_0_normal.py::TestUpdateCons::test_case06
+    pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case06
     checkhealth
     echo "=======xpos共识测试 ======="
-    pytest -m "not abnormal" $args cases/consensus/tdpos --type xpos --junit-xml=$result_dir/test_xpos.xml
+    pytest $args cases/consensus/tdpos --type xpos --junit-xml=$result_dir/test_xpos.xml
     checkhealth
 }
 
 function poa_test()
 {
     echo "=======升级共识：poa 2矿工 ======="
-    pytest -m "not abnormal" cases/update/test_update_0_normal.py::TestUpdateCons::test_case02
+    pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case02
     checkhealth
     echo "=======poa共识测试 ======="
-    pytest -m "not abnormal" $args cases/consensus/poa --type poa --junit-xml=$result_dir/test_poa.xml
+    pytest $args cases/consensus/poa --type poa --junit-xml=$result_dir/test_poa.xml
     checkhealth
 }
 
 function xpoa_test()
 {
     echo "=======升级共识：xpoa 2矿工 ======="
-    pytest -m "not abnormal" cases/update/test_update_0_normal.py::TestUpdateCons::test_case04
+    pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case04
     checkhealth
     echo "=======xpoa共识测试 ======="
-    pytest -m "not abnormal" $args cases/consensus/poa --type xpoa --junit-xml=$result_dir/test_xpoa.xml
+    pytest $args cases/consensus/poa --type xpoa --junit-xml=$result_dir/test_xpoa.xml
     checkhealth
 }
 
 function single_test()
 {
     echo "=======升级共识：single ======="
-    pytest -m "not abnormal" cases/update/test_update_0_normal.py::TestUpdateCons::test_case08
+    pytest cases/update/test_update_0_normal.py::TestUpdateCons::test_case08
     checkhealth
     echo "=======single共识测试 ======="
-    pytest -m "not abnormal" $args cases/consensus/single --junit-xml=$result_dir/test_single.xml
+    pytest $args cases/consensus/single --junit-xml=$result_dir/test_single.xml
     checkhealth
 }
 
 function contractsdk_test()
 {
     echo "=======合约sdk测试 ======="
-    pytest -m "not abnormal" $args cases/contractsdk --junit-xml=$result_dir/test_contractsdk.xml
+    pytest $args cases/contractsdk --junit-xml=$result_dir/test_contractsdk.xml
     checkhealth
 }
 
 echo "=======测试环境准备======="
-pytest -m "not abnormal" $args cases/test_env.py --junit-xml=$result_dir/test_env.xml
+pytest $args cases/test_env.py --junit-xml=$result_dir/test_env.xml
 checkhealth
 
 if [ "$type" == "basic" ];then
