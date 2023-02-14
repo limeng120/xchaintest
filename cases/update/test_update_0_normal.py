@@ -69,7 +69,7 @@ class TestUpdateCons:
         err, result = input_args.test.basic_function()
         assert err == 0, result
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case01(self, input_args):
         """
         tdpos升级到tdpos
@@ -81,7 +81,7 @@ class TestUpdateCons:
         print("tdpos升级到tdpos")
         self.update("tdpos", "tdpos", 1, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case02(self, input_args):
         """
         tdpos升级到poa
@@ -89,7 +89,7 @@ class TestUpdateCons:
         print("tdpos升级到poa")
         self.update("tdpos", "poa", 1, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case03(self, input_args):
         """
         poa升级到tdpos
@@ -97,7 +97,7 @@ class TestUpdateCons:
         print("poa升级到tdpos")
         self.update("poa", "tdpos", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case04(self, input_args):
         """
         tdpos升级到xpoa
@@ -105,7 +105,7 @@ class TestUpdateCons:
         print("tdpos升级到xpoa")
         self.update("tdpos", "xpoa", 1, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case05(self, input_args):
         """
         xpoa升级到tdpos
@@ -113,7 +113,7 @@ class TestUpdateCons:
         print("xpoa升级到tdpos")
         self.update("xpoa", "tdpos", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case06(self, input_args):
         """
         tdpos升级到xpos
@@ -121,7 +121,7 @@ class TestUpdateCons:
         print("tdpos升级到xpos")
         self.update("tdpos", "xpos", 1, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case07(self, input_args):
         """
         xpos升级到tdpos
@@ -129,7 +129,7 @@ class TestUpdateCons:
         print("xpos升级到tdpos")
         self.update("xpos", "tdpos", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case08(self, input_args):
         """
         tdpos升级到single
@@ -137,7 +137,7 @@ class TestUpdateCons:
         print("tdpos升级到single")
         self.update("tdpos", "single", 1, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case09(self, input_args):
         """
         single升级到tdpos
@@ -145,7 +145,7 @@ class TestUpdateCons:
         print("single升级到tdpos")
         self.update("single", "tdpos", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case10(self, input_args):
         """
         xpos升级到xpos
@@ -156,7 +156,7 @@ class TestUpdateCons:
         print("xpos升级到xpos")
         self.update("xpos", "xpos", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case11(self, input_args):
         """
         xpos升级到poa
@@ -164,7 +164,7 @@ class TestUpdateCons:
         print("xpos升级到poa")
         self.update("xpos", "poa", 1, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case12(self, input_args):
         """
         poa升级到xpos
@@ -172,7 +172,7 @@ class TestUpdateCons:
         print("poa升级到xpos")
         self.update("poa", "xpos", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case13(self, input_args):
         """
         xpos升级到xpoa
@@ -180,7 +180,7 @@ class TestUpdateCons:
         print("xpos升级到xpoa")
         self.update("xpos", "xpoa", 1, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case14(self, input_args):
         """
         xpoa升级到xpos
@@ -188,7 +188,7 @@ class TestUpdateCons:
         print("xpoa升级到xpos")
         self.update("xpoa", "xpos", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case15(self, input_args):
         """
         xpos升级到single
@@ -196,7 +196,7 @@ class TestUpdateCons:
         print("xpos升级到single")
         self.update("xpos", "single", 1, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case16(self, input_args):
         """
         single升级到xpos
@@ -204,7 +204,7 @@ class TestUpdateCons:
         print("single升级到xpos")
         self.update("single", "xpos", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case17(self, input_args):
         """
         poa升级到poa
@@ -215,7 +215,7 @@ class TestUpdateCons:
         print("poa升级到poa")
         self.update("poa", "poa", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case18(self, input_args):
         """
         poa升级到xpoa
@@ -223,7 +223,7 @@ class TestUpdateCons:
         print("poa升级到xpoa")
         self.update("poa", "xpoa", 1, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case19(self, input_args):
         """
         xpoa升级到poa
@@ -231,7 +231,7 @@ class TestUpdateCons:
         print("xpoa升级到poa")
         self.update("xpoa", "poa", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case20(self, input_args):
         """
         poa升级到single
@@ -239,7 +239,7 @@ class TestUpdateCons:
         print("poa升级到single")
         self.update("poa", "single", 1, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case21(self, input_args):
         """
         single升级到poa
@@ -247,7 +247,7 @@ class TestUpdateCons:
         print("single升级到poa")
         self.update("single", "poa", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case22(self, input_args):
         """
         xpoa升级到xpoa
@@ -258,7 +258,7 @@ class TestUpdateCons:
         print("xpoa升级到xpoa")
         self.update("xpoa", "xpoa", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case23(self, input_args):
         """
         xpoa升级到single
@@ -266,7 +266,7 @@ class TestUpdateCons:
         print("xpoa升级到single")
         self.update("xpoa", "single", 1, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case24(self, input_args):
         """
         single升级到single
@@ -274,7 +274,7 @@ class TestUpdateCons:
         print("single升级到single")
         self.update("single", "single", 0, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case25(self, input_args):
         """
         single升级到xpoa
@@ -282,7 +282,7 @@ class TestUpdateCons:
         print("single升级到xpoa")
         self.update("single", "xpoa", 1, input_args)
 
-    @pytest.mark.skip("共识测试的用例已覆盖升级场景所以跳过")
+    @pytest.mark.p2
     def test_case26(self, input_args):
         """
         xpoa升级到tdpos

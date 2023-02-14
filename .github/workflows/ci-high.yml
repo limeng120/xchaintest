@@ -44,4 +44,4 @@ jobs:
           sleep 15
       - name: Test with pytest
         run: |
-          bash run_case.sh highlevel
+          bash run_case.sh high

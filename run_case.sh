@@ -70,8 +70,9 @@ function pchain_test()
 
 function update_test()
 {
+    # 升级的用例在tdpos_test xpos_test等流程中测试到，test_update_0_normal.py耗时长且不稳定，跳过
     echo "=======共识升级测试======="
-    pytest -m "not abnormal" $args cases/update --junit-xml=$result_dir/test_update.xml
+    pytest -m "not abnormal" $args cases/update/test_govern* cases/update/test_pro* cases/update/test_vote* --junit-xml=$result_dir/test_update.xml
     checkhealth
 }
 
@@ -138,9 +139,9 @@ checkhealth
 
 if [ "$type" == "basic" ];then
     basic
-elif [ "$type" == "middlelevel" ];then
+elif [ "$type" == "middle" ];then
     update_test
-elif [ "$type" == "highlevel" ];then
+elif [ "$type" == "high" ];then
     contractsdk_test
     pchain_test
     single_test
@@ -149,7 +150,7 @@ elif [ "$type" == "highlevel" ];then
     tdpos_test
     xpos_test
 else
-    echo "please input args: basic or highlevel"
+    echo "please input args: basic middle or high"
 fi
 
 err=$(cat result/*|grep "failure message"|wc -l)
