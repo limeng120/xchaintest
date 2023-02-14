@@ -152,38 +152,6 @@ class TestCppWasmErr:
         assert msg in result, "报错信息错误"
 
     @pytest.mark.abnormal
-    def test_case10(self, input_args):
-        """
-        部署cpp合约，使用错误的文件：java编译的二进制
-        """
-        print("\n部署cpp合约，使用错误的文件：java编译的二进制")
-        contract_account = "XC" + input_args.account + "@" + input_args.conf.name
-        args = json.dumps(self.deploy)
-        java_file = "javaTemplate/counter-0.1.0-jar-with-dependencies.jar"
-        err, result = input_args.test.xlib.deploy_contract(
-            "wasm", "cpp", self.cname + "new", java_file, contract_account, args
-        )
-        assert err != 0, "部署cpp wasm合约成功，不合预期： " + result
-        msg = "run wasm2c error"
-        assert msg in result, "报错信息错误"
-
-    @pytest.mark.abnormal
-    def test_case12(self, input_args):
-        """
-        部署cpp合约，使用错误的文件：go native编译的二进制
-        """
-        print("\n部署cpp合约，使用错误的文件：go native编译的二进制")
-        contract_account = "XC" + input_args.account + "@" + input_args.conf.name
-        args = json.dumps(self.deploy)
-        go_file = "goTemplate/counter"
-        err, result = input_args.test.xlib.deploy_contract(
-            "wasm", "cpp", self.cname + "new", go_file, contract_account, args
-        )
-        assert err != 0, "部署cpp wasm合约成功，不合预期： " + result
-        msg = "run wasm2c error"
-        assert msg in result, "报错信息错误"
-
-    @pytest.mark.abnormal
     def test_case13(self, input_args):
         """
         调用不存在的合约

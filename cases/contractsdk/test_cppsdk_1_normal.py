@@ -44,7 +44,7 @@ class TestFeatures2:
         err, befor_features = input_args.test.xlib.get_balance(account=self.cname)
         # 转账
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "put", args, amount=1
+            "wasm", self.cname, "put", args, amount=1
         )
         assert err == 0, "调put方法,并给合约转账 失败" + result
         err, after_features = input_args.test.xlib.get_balance(account=self.cname)
@@ -64,7 +64,7 @@ class TestFeatures2:
         err, befor_features = input_args.test.xlib.get_balance(account=self.cname)
         # 转账
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "get", args, amount=1
+            "wasm", self.cname, "get", args, amount=1
         )
         assert err == 0, "调put方法,并给合约转账 失败" + result
         err, after_features = input_args.test.xlib.get_balance(account=self.cname)
@@ -80,7 +80,7 @@ class TestFeatures2:
         """
         print("\nlogging 从合约内写一条日志")
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "logging", "None"
+            "wasm", self.cname, "logging", "None"
         )
         assert err == 0, "从合约内写一条日志 失败" + result
 
@@ -93,7 +93,7 @@ class TestFeatures2:
         invoke_args = {"start": "test1", "limit": "test110"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "iterator", args
+            "wasm", self.cname, "iterator", args
         )
         assert err == 0, "迭代访问,limit大于start失败" + result
         assert result.split("response:")[-1].count("test") == 1, "返回的个数不匹配" + result
@@ -111,7 +111,7 @@ class TestFeatures2:
         for arg in invoke_args:
             args = json.dumps(arg)
             err, result = input_args.test.xlib.invoke_contract(
-                "native", self.cname, "iterator", args
+                "wasm", self.cname, "iterator", args
             )
             assert err == 0, "迭代访问,limit等于start失败" + result
             getdiff = result.split("\n")[0].split("response:")[-1]
@@ -130,7 +130,7 @@ class TestFeatures2:
         for arg in invoke_args:
             args = json.dumps(arg)
             err, result = input_args.test.xlib.invoke_contract(
-                "native", self.cname, "iterator", args
+                "wasm", self.cname, "iterator", args
             )
             assert err == 0, "迭代访问,limit,start范围不存在 失败" + result
             getdiff = result.split("\n")[0].split("response:")[-1]
@@ -144,11 +144,11 @@ class TestFeatures2:
         print("\ncaller 获取合约发起者")
         contract_account = "XC" + input_args.account + "@" + input_args.conf.name
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "caller", "None", account=contract_account
+            "wasm", self.cname, "caller", "None", account=contract_account
         )
         assert err == 0, "caller 获取合约发起者 失败" + result
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "caller", "None", keys="data/keys/"
+            "wasm", self.cname, "caller", "None", keys="data/keys/"
         )
         assert err == 0, "caller 获取合约发起者 失败" + result
 
@@ -159,10 +159,10 @@ class TestFeatures2:
         """
         print("\ncall 发起跨合约调用")
         # 1.合约调用
-        invoke_args = {"contract": "hello_go", "key": "dudu", "method": "increase"}
+        invoke_args = {"contract": "hello_cpp", "key": "dudu", "method": "increase"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "call", args
+            "wasm", self.cname, "call", args
         )
         assert err == 0, "call 发起跨合约调用 失败" + result
         value1 = input_args.test.xlib.get_value_from_res(result)
@@ -170,7 +170,7 @@ class TestFeatures2:
         query = {"key": "dudu"}
         args = json.dumps(query)
         err, get_result = input_args.test.xlib.query_contract(
-            "native", "hello_go", "get", args
+            "wasm", "hello_cpp", "get", args
         )
         value2 = input_args.test.xlib.get_value_from_res(get_result)
         assert value1 == value2, "查询跨合约调用次数不匹配" + get_result
@@ -182,7 +182,7 @@ class TestFeatures2:
         """
         print("\njson_literal 返回 json 一个字面量")
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "json_literal", "None"
+            "wasm", self.cname, "json_literal", "None"
         )
         assert err == 0, "json_literal 返回 json 一个字面量 失败" + result
 
@@ -195,7 +195,7 @@ class TestFeatures2:
         invoke_args = '["hello","world"]'
         args = json.dumps({"value": invoke_args})
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "json_load_dump", args
+            "wasm", self.cname, "json_load_dump", args
         )
         assert err == 0, "json_load_dump 读取参数 value,array类型 失败" + result
 
@@ -213,7 +213,7 @@ class TestFeatures2:
         for arg in invoke_args:
             args = json.dumps(arg)
             err, result = input_args.test.xlib.invoke_contract(
-                "native", self.cname, "json_load_dump", args
+                "wasm", self.cname, "json_load_dump", args
             )
             assert err == 0, "json_load_dump 读取参数 value,bool类型 失败" + result
 
@@ -226,7 +226,7 @@ class TestFeatures2:
         invoke_args = {"value": "3.14"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "json_load_dump", args
+            "wasm", self.cname, "json_load_dump", args
         )
         assert err == 0, "json_load_dump 读取参数 value,float类型 失败" + result
 
@@ -239,7 +239,7 @@ class TestFeatures2:
         invoke_args = {"value": "5"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "json_load_dump", args
+            "wasm", self.cname, "json_load_dump", args
         )
         assert err == 0, "json_load_dump 读取参数 value,int类型 失败" + result
 
@@ -253,7 +253,7 @@ class TestFeatures2:
         for arg in invoke_args:
             args = json.dumps({"value": arg})
             err, result = input_args.test.xlib.invoke_contract(
-                "native", self.cname, "json_load_dump", args
+                "wasm", self.cname, "json_load_dump", args
             )
             assert err == 0, "json_load_dump 读取参数 value,string类型 失败" + result
             assert json.loads(
@@ -271,7 +271,7 @@ class TestFeatures2:
         args = json.dumps({"value": invoke_args})
         print(args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "json_load_dump", args
+            "wasm", self.cname, "json_load_dump", args
         )
         assert err == 0, "json_load_dump 读取参数 value,object类型 失败" + result
         assert json.loads(result.split("response:")[-1].split("\n")[0]) == json.loads(
@@ -294,7 +294,7 @@ class TestFeatures2:
         invoke_args = {"tx_id": txid}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "query_tx", args
+            "wasm", self.cname, "query_tx", args
         )
         assert err == 0, "查询query_tx交易失败： " + result
         err, blockid = input_args.test.xlib.query_tx(txid)
@@ -316,7 +316,7 @@ class TestFeatures2:
         invoke_args = {"blockid": blockid}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.query_contract(
-            "native", self.cname, "query_block", args
+            "wasm", self.cname, "query_block", args
         )
         assert err == 0, "查询query_block区块失败： " + result
 
@@ -332,7 +332,7 @@ class TestFeatures2:
         invoke_args = {"to": "testAccount", "amount": self.amount}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "transfer", args, account=contract_account, fee=100
+            "wasm", self.cname, "transfer", args, account=contract_account, fee=100
         )
         assert err == 0, "使用合约账户转账失败： " + result
         print("转账后查询账户")
@@ -357,7 +357,7 @@ class TestFeatures2:
         invoke_args = {"to": "testAccount", "amount": self.amount}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "transfer", args, keys="data/keys/", fee=100
+            "wasm", self.cname, "transfer", args, keys="data/keys/", fee=100
         )
         assert err == 0, "使用普通账户转账失败： " + result
         print("转账后查询账户")
@@ -383,7 +383,7 @@ class TestFeatures2:
         invoke_args = {"to": contract_account, "amount": self.amount}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "transfer", args, account=contract_account, fee=100
+            "wasm", self.cname, "transfer", args, account=contract_account, fee=100
         )
         assert err == 0, "自身转账失败： " + result
         print("转账后查询合约账户")

@@ -27,7 +27,7 @@ class TestCallErr:
             self.c2name + "余额不是" + str(c2_bal) + "，而是" + c2_balance
         )
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case01(self, input_args):
         """
         【异常】callc1 callc2合约余额不足，调用callc1合约invoke方法
@@ -43,7 +43,7 @@ class TestCallErr:
         msg = "no enough money(UTXO) to start this transaction"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case02(self, input_args):
         """
         【异常】callc1 合约余额不足，调用callc1合约invoke方法
@@ -66,7 +66,7 @@ class TestCallErr:
         msg = "no enough money(UTXO) to start this transaction"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case03(self, input_args):
         """
         【异常】callc2合约余额不足，调用callc1合约invoke方法

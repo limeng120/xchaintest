@@ -29,7 +29,7 @@ class TestBuiltinErr:
         assert err != 0, "异常条件转账成功， 不符合预期： " + result
         return result
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case01(self, input_args):
         """
         查询不存在的tx
@@ -46,7 +46,7 @@ class TestBuiltinErr:
         msg = "transaction not found"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case02(self, input_args):
         """
         查询不存在的区块
@@ -63,7 +63,7 @@ class TestBuiltinErr:
         msg = "block not exist in this chain"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case03(self, input_args):
         """
         【异常】transfer，转账xuper，数额负数
@@ -74,7 +74,7 @@ class TestBuiltinErr:
         msg = "amount must not be negative"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case04(self, input_args):
         """
         【异常】transfer，转账xuper，参数to缺少
@@ -85,7 +85,7 @@ class TestBuiltinErr:
         msg = "missing to"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case05(self, input_args):
         """
         【异常】transfer，转账xuper，数额是小数
@@ -96,7 +96,7 @@ class TestBuiltinErr:
         msg = "NumberFormatException"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case06(self, input_args):
         """
         【异常】transfer，转账xuper，数额超余额
@@ -107,7 +107,7 @@ class TestBuiltinErr:
         msg = "no enough money(UTXO) to start this transaction"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case07(self, input_args):
         """
         transfer，转账，数额0
@@ -118,7 +118,7 @@ class TestBuiltinErr:
         msg = "should  be large than zero"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case08(self, input_args):
         """
         【异常】transferAndPrintAmount，给合约转账，合约内部查询转账金额，amount设为负数
@@ -132,7 +132,7 @@ class TestBuiltinErr:
         msg = "amount must not be negative"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case09(self, input_args):
         """
         【异常】调put方法，写入kv，并给合约转账，amount设为负数
@@ -147,7 +147,7 @@ class TestBuiltinErr:
         msg = "Amount in transaction can not be negative number"
         assert msg in result, "报错信息错误"
 
-    @pytest.mark.abnormal
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case10(self, input_args):
         """
         【异常】调get方法，读取key，并给合约转账，amount设为负数

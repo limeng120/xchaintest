@@ -1,0 +1,20 @@
+[SIMILARITIES]
+min-similarity-lines=30
+
+[DESIGN]
+max-args=10
+max-locals=20
+max-statements=70
+max-return-statements=10
+max-branches=20
+max-public-methods=40
+min-public-methods=0
+max-attributes=15
+disable=no-self-use
+
+[BASIC]
+# Good variable names which should always be accepted, separated by a comma.
+good-names=i, j, k, s, tx, b, x, sh, ak, to, v
+
+[FORMAT]
+max-line-length=120

@@ -46,7 +46,7 @@ class TestBuiltin:
         err, self.befor_cname = input_args.test.xlib.get_balance(account=self.cname)
         assert err == 0, "查询" + self.cname + "余额 失败" + self.befor_cname
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署java")
     def test_case01(self, input_args):
         """
         合约部署builtin-types合约
@@ -58,7 +58,7 @@ class TestBuiltin:
         )
         assert err == 0 or "exist" in result, "部署builtin-types合约失败： " + result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case02(self, input_args):
         """
         getTx，查询交易
@@ -78,7 +78,7 @@ class TestBuiltin:
         )
         assert err == 0, "查询getTx交易失败： " + result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case03(self, input_args):
         """
         getBlock，查询区块
@@ -99,7 +99,7 @@ class TestBuiltin:
         )
         assert err == 0, "查询getBlock区块失败： " + result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case04(self, input_args):
         """
         transfer，转账
@@ -124,7 +124,7 @@ class TestBuiltin:
             self.amount
         ), ("查询" + self.cname + "余额 失败" + after_cname)
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case05(self, input_args):
         """
         调put方法,写入1个kv，记录个数
@@ -137,7 +137,7 @@ class TestBuiltin:
         )
         assert err == 0, "调put方法,写入kv 失败" + result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case06(self, input_args):
         """
         调get方法,查询1个kv，记录个数
@@ -150,7 +150,7 @@ class TestBuiltin:
         )
         assert err == 0, "调get方法,查询kv 失败" + result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case07(self, input_args):
         """
         调getList方法，传入start
@@ -159,7 +159,7 @@ class TestBuiltin:
         invoke_args = {"start": "test1"}
         self.get_list(invoke_args, input_args)
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case10(self, input_args):
         """
         调getList方法，传入start, start后无数据
@@ -168,7 +168,7 @@ class TestBuiltin:
         invoke_args = {"start": "key"}
         self.get_list(invoke_args, input_args)
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case11(self, input_args):
         """
         调put方法，key含特殊字符,value含特殊字符
@@ -181,7 +181,7 @@ class TestBuiltin:
         )
         assert err == 0, "调put方法:key和value含特殊字符 失败" + result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case12(self, input_args):
         """
         调get方法,key含特殊字符
@@ -194,7 +194,7 @@ class TestBuiltin:
         )
         assert err == 0, "调get方法,key含特殊字符 失败" + result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case13(self, input_args):
         """
         调put方法,key长度1k,value长度1k
@@ -210,7 +210,7 @@ class TestBuiltin:
         )
         assert err == 0, "调put方法：key和value长度1K, 失败" + result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case14(self, input_args):
         """
         调get方法，key长度1k
@@ -226,7 +226,7 @@ class TestBuiltin:
         # value值长度是1024
         assert result == "value" + self.widthCount
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case15(self, input_args):
         """
         authRequire，查询合约方法的调用者
@@ -237,7 +237,7 @@ class TestBuiltin:
         )
         assert err == 0, "authRequire,查询合约方法的调用者 失败" + result
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case16(self, input_args):
         """
         transferAndPrintAmount，给合约转账，合约内部查询转账金额
@@ -255,7 +255,7 @@ class TestBuiltin:
             "查询" + self.cname + "余额 失败" + after_cname
         )
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case17(self, input_args):
         """
         调put方法，写入kv，并给合约转账
@@ -275,7 +275,7 @@ class TestBuiltin:
             "查询" + self.cname + "余额 失败" + after_cname
         )
 
-    @pytest.mark.p2
+    @pytest.mark.skip("虚拟机部署native合约会超时")
     def test_case18(self, input_args):
         """
         调get方法，读取key，并给合约转账

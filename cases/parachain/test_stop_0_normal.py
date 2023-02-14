@@ -56,7 +56,7 @@ class TestStopChain:
             self.stop_query_chain(chain, input_args)
         # 检查平行链是否全停止
         result = self.get_all_chain(input_args)
-        assert len(result) == 0, "还有未停用的平行链，失败：" + result
+        assert len(result) == 0, "还有未停用的平行链，失败：" + str(result)
 
     @pytest.mark.p2
     def test_case02(self, input_args):

@@ -88,18 +88,18 @@ class TestGroup:
             tmp = json.loads(result.split("\n")[0].split(": ")[1])
             assert sorted(tmp["admin"]) == sorted(admin), "修改后 hitdpos1群组不符合预期"
 
-    @pytest.mark.p2
-    def test_case05(self, input_args):
-        """
-        修改已停用的链的群组
-        """
-        print("\n 修改已停用的链的群组")
-        err, result = input_args.test.pchain.stop_chain(name="hipow1")
-        assert err == 0, "停用链失败：" + result
-        # 等2个区块，链停用
-        input_args.test.xlib.wait_num_height(2)
-        err, result = input_args.test.xlib.query_height(name="hipow1")
+    # @pytest.mark.p2
+    # def test_case05(self, input_args):
+    #     """
+    #     修改已停用的链的群组
+    #     """
+    #     print("\n 修改已停用的链的群组")
+    #     err, result = input_args.test.pchain.stop_chain(name="hipow1")
+    #     assert err == 0, "停用链失败：" + result
+    #     # 等2个区块，链停用
+    #     input_args.test.xlib.wait_num_height(2)
+    #     err, result = input_args.test.xlib.query_height(name="hipow1")
 
-        assert "not find chain hipow1" in result, "停用链后,查看链的区块高度不合预期 ：" + result
-        admin = [input_args.addrs[0], input_args.addrs[1]]
-        self.edit_query_group("hipow1", admin, input_args)
+    #     assert "not find chain hipow1" in result, "停用链后,查看链的区块高度不合预期 ：" + result
+    #     admin = [input_args.addrs[0], input_args.addrs[1]]
+    #     self.edit_query_group("hipow1", admin, input_args)

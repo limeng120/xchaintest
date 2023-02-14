@@ -6,10 +6,10 @@
 - 开发语言：Python 3.x
 - 依赖包：pytest pyyaml numpy pytz
 - 版本控制工具：Git
-- 其他：jdk1.8+ go1.13+
+- 其他：go1.13+
 
 ## 部署网络，执行测试用例
-### 1.部署3节点xchain网络，编译go合约文件
+### 1.部署3节点xchain网络
 参考文档 https://github.com/xuperchain/xuperchain#run-multi-nodes-blockchain
 部署的xchain网络默认使用端口37101、37102、37103，所以自动化用例默认使用的端口也是这三个。
 ```
@@ -18,11 +18,6 @@ cd xuperchain && make && make testnet && cd testnet/ && sh control_all.sh start
 pwd
 cd ../.. && cp xuperchain/output/bin/xchain-cli client/bin/
 sleep 15
-
-git clone https://github.com/xuperchain/contract-sdk-go.git
-cd contract-sdk-go/example
-go build -o ../../client/goTemplate/counter counter/main.go
-go build -o ../../client/goTemplate/features features/main.go
 ```
 
 ### 2.配置说明
@@ -30,9 +25,12 @@ go build -o ../../client/goTemplate/features features/main.go
 2. `account`为xchain网络3节点的公私玥，`data/keys`为node1的公私玥，按测试的xchain网络修改
 
 ### 3.运行用例
+为提升CI执行速度，用例拆分为3个批次，在3台测试环境并发执行。
+在本地执行时，可以顺序串行执行3个批次。
 ```
-sh run_case.sh basic   # 执行基本功能用例，运行时间约10min
-sh run_case.sh highlevel # 执行高阶功能的用例，运行时间约75min
+sh run_case.sh batch1   # 运行时间约11min
+sh run_case.sh batch2   # 运行时间约15min
+sh run_case.sh batch3   # 运行时间约11min
 ```
 
 ### 4.调试用例

@@ -17,14 +17,14 @@ class TestPreAcl:
         运行acl用例的前置步骤：
         创建合约账户
         转账给合约账户
-        部署go native合约
+        部署合约
         """
         account = "2111111111111112"
         name = input_args.conf.name
         acl_account = "XC" + account + "@" + name
 
-        file = "goTemplate/counter"
-        cname = "gn_MultiSign"
+        file = "cppTemplate/counter.wasm"
+        cname = "multisign"
 
         # 创建合约账户
         aks = [input_args.addrs[0], input_args.addrs[1]]
@@ -50,7 +50,7 @@ class TestPreAcl:
         args = json.dumps({"creator": "abc"})
         # 生成部署合约的tx
         err, result = input_args.test.xlib.deploy_contract(
-            "native", "go", cname, file, acl_account, args, isMulti=""
+            "wasm", "cpp", cname, file, acl_account, args, isMulti=""
         )
         # 生成部署的tx失败，或者 合约已存在，直接返回
         if "already exists" not in result:

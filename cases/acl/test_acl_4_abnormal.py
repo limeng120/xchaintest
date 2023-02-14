@@ -13,7 +13,7 @@ class TestContractAclErr:
 
     account = "2111111111111112"
     # 合约调用
-    cname = "gn_MultiSign"
+    cname = "multisign"
 
     @pytest.mark.abnormal
     def test_update_acl1(self, input_args):
@@ -42,7 +42,7 @@ class TestContractAclErr:
             "contract_name": "$acl",
             "method_name": "SetMethodAcl",
             "args": {
-                "contract_name": "go_natCon_err",
+                "contract_name": "not_exist",
                 "method_name": "increase",
                 "acl": acl_str,
             },
@@ -176,7 +176,7 @@ class TestContractAclErr:
         invoke_args = {"key": "dudu"}
         args = json.dumps(invoke_args)
         err, result = input_args.test.xlib.invoke_contract(
-            "native", self.cname, "increase", args, keys=input_args.keys[0]
+            "wasm", self.cname, "increase", args, keys=input_args.keys[0]
         )
         assert err != 0, "合约调用成功，不合预期： " + result
         msg = "ACL not enough"

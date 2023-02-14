@@ -17,6 +17,8 @@ class TestGToken:
         初始化代币
         """
         print("\n初始化代币")
+        output = "./output/data/alice"
+        input_args.test.xlib.create_account(output=output, lang="en", strength="1")
         err, result = input_args.test.xlib.govern_token(method_type="init")
         assert err == 0 or "Govern tokens has been initialized" in result, (
             "初始化治理代币失败： " + result
