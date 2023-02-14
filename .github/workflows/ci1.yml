@@ -1,4 +1,7 @@
-on: [push, pull_request]
+on:
+  schedule:
+    - cron:  '0 * * * *'
+
 name: CI1
 jobs:
   test:
