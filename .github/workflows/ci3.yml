@@ -1,5 +1,5 @@
 on: [push, pull_request]
-name: CI-BASIC
+name: CI3
 jobs:
   test:
     strategy:
@@ -44,4 +44,4 @@ jobs:
           sleep 15
       - name: Test with pytest
         run: |
-          bash run_case.sh basic
+          bash run_case.sh batch3

@@ -137,20 +137,20 @@ echo "=======测试环境准备======="
 pytest -m "not abnormal" $args cases/test_env.py --junit-xml=$result_dir/test_env.xml
 checkhealth
 
-if [ "$type" == "basic" ];then
+if [ "$type" == "batch1" ];then
     basic
-elif [ "$type" == "middle" ];then
     update_test
-elif [ "$type" == "high" ];then
     contractsdk_test
-    pchain_test
+elif [ "$type" == "batch2" ];then
     single_test
     poa_test
     xpoa_test
     tdpos_test
     xpos_test
+elif [ "$type" == "batch3" ];then
+    pchain_test
 else
-    echo "please input args: basic middle or high"
+    echo "please input args: batch1 batch2 or batch3"
 fi
 
 err=$(cat result/*|grep "failure message"|wc -l)
