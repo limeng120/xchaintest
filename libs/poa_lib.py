@@ -63,10 +63,14 @@ class Poa(Common):
             return err, result
 
         # tx上链后，在等三个区块后验证
-        err, result = self.xlib.wait_num_height(4)
-        if err != 0:
-            return err, result
-        err, result = self.check_consensus_val(nominates)
+        self.xlib.wait_num_height(4)
+        for i in range(5):
+            print("\n 第%d次验证候选人", i)
+            err, result = self.check_consensus_val(nominates)
+            if err != 0:
+                self.xlib.wait_num_height(1)
+            else:
+                return err, result
         return err, result
 
     def quick_edit_validates(self, nominates, acl_account, addrs, keys, **kwargs):

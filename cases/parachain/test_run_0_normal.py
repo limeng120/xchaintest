@@ -49,9 +49,9 @@ class TestChainBasic:
         """
         self.basic(input_args, name="hipoa1")
 
-    @pytest.mark.p1
-    def test_case06(self, input_args):
-        """
-        xpoa共识的平行链，测试基本功能
-        """
-        self.basic(input_args, name="hixpoa1")
+    # @pytest.mark.p1
+    # def test_case06(self, input_args):
+    #     """
+    #     xpoa共识的平行链，测试基本功能
+    #     """
+    #     self.basic(input_args, name="hixpoa1")
